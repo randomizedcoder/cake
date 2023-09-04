@@ -1,0 +1,13 @@
+---
+- name: Ansible Get Facts Playbook
+  hosts: app
+  tasks:
+    - debug:
+        msg: "{{ ansible_architecture }}"
+
+    - debug:
+        msg: "{{ ansible_cmdline }}"
+
+    # Accessing the list
+    - debug:
+        msg: "{{ ansible_all_ipv4_addresses }}"

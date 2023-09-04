@@ -1,0 +1,37 @@
+root@x13rd:/home/das# ./start_flent_laptop.bash
+######---------------------
+ip netns exec network200 flent rrul -p all_scaled -l 600 -H 172.16.100.10 -t 172.16.100.10_pi4 -o pi4.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T125918.296123.172_16_100_10_pi4.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.
+######---------------------
+ip netns exec network201 flent rrul -p all_scaled -l 600 -H 172.16.101.10 -t 172.16.101.10_pi3b -o pi3b.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T131024.651981.172_16_101_10_pi3b.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.
+######---------------------
+ip netns exec network202 flent rrul -p all_scaled -l 600 -H 172.16.102.10 -t 172.16.102.10_jetson -o jetson.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T132130.138373.172_16_102_10_jetson.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.
+######---------------------
+ip netns exec network203 flent rrul -p all_scaled -l 600 -H 172.16.103.10 -t 172.16.103.10_nanopi-neo3 -o nanopi-neo3.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T133234.869545.172_16_103_10_nanopi-neo3.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.
+######---------------------
+ip netns exec network204 flent rrul -p all_scaled -l 600 -H 172.16.104.10 -t 172.16.104.10_nanopi-r5c -o nanopi-r5c.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T134341.497659.172_16_104_10_nanopi-r5c.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.
+######---------------------
+ip netns exec network205 flent rrul -p all_scaled -l 600 -H 172.16.105.10 -t 172.16.105.10_asus2 -o asus2.png
+Starting Flent 2.1.1 using Python 3.11.4.
+Starting rrul test. Expected run time: 610 seconds.
+Data file written to ./rrul-2023-09-04T135417.275606.172_16_105_10_asus2.flent.gz
+Initialised matplotlib v3.5.2 on numpy v1.24.2.

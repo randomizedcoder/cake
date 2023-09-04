@@ -1,0 +1,57 @@
+<!-- sg300-10-2#sh ver
+SW version    1.4.11.5 ( date  08-Apr-2020 time  13:49:34 )
+Boot version    1.3.5.06 ( date  21-Jul-2013 time  15:12:10 )
+HW version    V02 -->
+
+port jumbo-frame
+vlan database
+vlan 2,100-105,200-205
+
+interface gigabitethernet1
+ no negotiation
+ description pi4
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet2
+ no negotiation
+ description carbon3rd
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet3
+ no negotiation
+ description jetson-nano
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet6
+ no negotiation
+ description nanopi-neo3
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet7
+ no negotiation
+ description asus-cn60-2
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet8
+ speed 100
+ description pi3b
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
+!
+interface gigabitethernet9
+ no negotiation
+ description nanopi-r5c
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-105,200-205
+ switchport trunk native vlan 2
