@@ -1,0 +1,11 @@
+[devices]
+3rd ansible_host=172.16.50.218
+pi4 ansible_host=172.16.50.124
+pi3b ansible_host=172.16.50.125
+jetson ansible_host=172.16.50.248
+nanopi-neo3 ansible_host=172.16.50.177
+nanopi-r5c ansible_host=172.16.50.156
+asus2 ansible_host=172.16.50.96
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
