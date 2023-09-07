@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-nic=eth0
+nic=end0
 x=103
 qdisc="cake"
 bandwidth="1gbit"

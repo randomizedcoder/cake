@@ -5,7 +5,7 @@ Host pi4
 	Hostname 172.16.50.124
 	User das
 Host pi3b
-	Hostname 172.16.50.125
+	Hostname 172.16.50.113
 	User das
 Host jetson
 	Hostname 172.16.50.248
