@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-sysctl -w net.core.default_qdisc=cake
+sysctl -w net.core.default_qdisc=fq_codel
 sysctl -w net.ipv4.ip_local_port_range="1025 65535"
 sysctl -w net.ipv4.tcp_timestamps=1
 
@@ -49,10 +49,8 @@ for x in "${vlans[@]}"; do
 	ip netns exec network"${y}" ip route add 0.0.0.0/0 via 172.16."${y}".1
 	#ip netns exec network"$y" ip route add 172.16."$x".0/24 via 172.16."$y".1
 
-	nets=(100 101)
+	nets=("${x}" "${y}")
 	for net in "${nets[@]}"; do
-		echo ip netns exec network"${net}" sysctl -w net.core.default_qdisc=fq_codel
-		ip netns exec network"${net}" sysctl -w net.core.default_qdisc=fq_codel
 
 		echo ip netns exec network"${net}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
 		ip netns exec network"${net}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
@@ -60,11 +58,21 @@ for x in "${vlans[@]}"; do
 		echo ip netns exec network"${net}" sysctl -w net.ipv4.tcp_timestamps=1
 		ip netns exec network"${net}" sysctl -w net.ipv4.tcp_timestamps=1
 
-		echo tc qdisc replace dev "${nic}"."${net}" root fq_codel
-		tc qdisc replace dev "${nic}"."${net}" root fq_codel
+		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
+		ip netns exec network"${net}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
 
-		echo tc -s qdisc ls dev "${nic}"."${net}"
-		tc -s qdisc ls dev "${nic}"."${net}"
+		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
+		ip netns exec network"${net}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
+
+		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_congestion_control=cubic
+		ip netns exec network"${net}" sysctl net.ipv4.tcp_congestion_control=cubic
+
+		echo ip netns exec network"${net}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
+		ip netns exec network"${net}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
+
+		echo ip netns exec network"${net}" tc -s qdisc ls dev "${nic}"."${net}"
+		ip netns exec network"${net}" tc -s qdisc ls dev "${nic}"."${net}"
+
 	done
 
 	#
@@ -94,17 +102,20 @@ for x in "${vlans[@]}"; do
 	# ping test
 	#
 	echo "--------------------------------ping"
+	count=5
 
-	echo ip netns exec network"${x}" ping -w 1 -c 2 172.16."${x}".1
-	ip netns exec network"${x}" ping -w 1 -c 2 172.16."${x}".1
+	echo ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${x}".1
+	ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${x}".1
 
-	echo ip netns exec network"${x}" ping -w 1 -c 2 172.16."${y}".1
-	ip netns exec network"${x}" ping -w 1 -c 2 172.16."${y}".1
+	echo ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${y}".1
+	ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${y}".1
 
-	echo ip netns exec network"${y}" ping -w 1 -c 2 172.16."${y}".1
-	ip netns exec network"${y}" ping -w 1 -c 2 172.16."${y}".1
+	echo ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${y}".1
+	ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${y}".1
 
-	echo ip netns exec network"${y}" ping -w 1 -c 2 172.16."${x}".1
-	ip netns exec network"${y}" ping -w 1 -c 2 172.16."${x}".1
+	echo ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${x}".1
+	ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${x}".1
 
 done
+
+ls /run/netns/network*

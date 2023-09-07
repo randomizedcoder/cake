@@ -29,13 +29,22 @@ pfifo_fast)
 	;;
 cake)
 	# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-	echo tc qdisc replace dev "${nic}" root cake ethernet bandwidth "${bandwidth}" lan
-	tc qdisc replace dev "${nic}" root cake ethernet bandwidth "${bandwidth}" lan
+	echo tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
+	tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
 	;;
 fq_codel)
 	# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
 	echo tc qdisc replace dev "${nic}" root fq_codel
 	tc qdisc replace dev "${nic}" root fq_codel
+	;;
+fq)
+	echo tc qdisc replace dev "${nic}" root fq
+	tc qdisc replace dev "${nic}" root fq
+	;;
+noqueue)
+	# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
+	echo tc qdisc replace dev "${nic}" root noqueue
+	tc qdisc replace dev "${nic}" root noqueue
 	;;
 *)
 	echo "unsupport qdisc"
@@ -74,13 +83,21 @@ for net in "${nets[@]}"; do
 		;;
 	cake)
 		# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root cake ethernet bandwidth "${bandwidth}" lan
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root cake ethernet bandwidth "${bandwidth}" lan
+		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
+		ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
 		;;
 	fq_codel)
 		# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
 		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
 		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
+		;;
+	fq)
+		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq
+		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq
+		;;
+	noqueue)
+		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root noqueue
+		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root noqueue
 		;;
 	*)
 		echo "unsupport qdisc"
