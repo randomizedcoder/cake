@@ -1,11 +1,17 @@
 #!/usr/bin/bash
 
+scp cake_3rd.bash 3rd:
 scp cake_laptop.bash 3rd:
-
 scp start_netserver_laptop.bash 3rd:
 scp start_flent_laptop.bash 3rd:
 scp start_iperf_server_laptop.bash 3rd:
 scp start_iperf_client_laptop.bash 3rd:
+
+scp cake_ryzen.bash ryzen:
+scp start_netserver_laptop.bash ryzen:
+scp start_flent_laptop.bash ryzen:
+scp start_iperf_server_laptop.bash ryzen:
+scp start_iperf_client_laptop.bash ryzen:
 
 scp 3rd:*.flent.gz ./flent/
 scp 3rd:*.png ./pngs/
