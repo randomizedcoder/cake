@@ -1,6 +1,9 @@
 Host 3rd
 	Hostname 172.16.50.218
 	User das
+Host ryzen
+	Hostname 172.16.50.105
+	User das
 Host pi4
 	Hostname 172.16.50.124
 	User das
@@ -22,6 +25,7 @@ Host asus1
 Host asus2
 	Hostname 172.16.50.96
 	User das
+
 Host cisco2
     Hostname 172.16.50.9
     User root
