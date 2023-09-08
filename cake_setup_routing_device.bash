@@ -5,6 +5,7 @@ x=$2
 y=$((x + 100))
 qdisc=$3
 bandwidth=$4
+rtt=$5
 
 #-----------------------------------------------
 # system setup
@@ -29,8 +30,8 @@ pfifo_fast)
 	;;
 cake)
 	# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-	echo tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
-	tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
+	echo tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
+	tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
 	;;
 fq_codel)
 	# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
@@ -83,8 +84,8 @@ for net in "${nets[@]}"; do
 		;;
 	cake)
 		# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt 3ms
+		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
+		ip netns exec network"${x}" tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
 		;;
 	fq_codel)
 		# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
