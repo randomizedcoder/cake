@@ -1,121 +1,164 @@
 #!/usr/bin/bash
 
+laptop=$1
+echo "laptop:$laptop"
+
+nic=$2
+echo "nic:$nic"
+
+case ${laptop} in
+3rd)
+	echo "laptop 3rd"
+	;;
+ryzen)
+	echo "laptop ryzen"
+	;;
+*)
+	echo "Please pass \"3rd\" or \"ryzen\""
+	exit 1
+	;;
+esac
+
 sysctl -w net.core.default_qdisc=fq_codel
 sysctl -w net.ipv4.ip_local_port_range="1025 65535"
 sysctl -w net.ipv4.tcp_timestamps=1
 
-nic=enp0s25
-vlans=(100 101 102 103 104 105)
+ping_count=3
 
-for x in "${vlans[@]}"; do
-	y=$((x + 100))
-	echo "x:${x}, y:${y}"
+# sub interface names are apparently limited to 11 chars
+vlan_dev=${nic:0:11}
+echo "vlan_dev${vlan_dev}"
 
-	echo ip link add link "${nic}" name "${nic}"."${x}" type vlan id "${x}"
-	ip link add link "${nic}" name "${nic}"."${x}" type vlan id "${x}"
+subnet_octet_a=172
+subnet_octet_b=16
 
-	echo ip netns add network"${x}"
-	ip netns add network"${x}"
+vlan_start=100
+vlan_addition=50
 
-	echo ip link set dev "${nic}"."${x}" netns network"${x}"
-	ip link set dev "${nic}"."${x}" netns network"${x}"
+echo "subnet_octet_a:${subnet_octet_a}"
+echo "subnet_octet_b:${subnet_octet_b}"
+echo "vlan_start:${vlan_start}"
+echo "vlan_addition:${vlan_addition}"
 
-	echo ip netns exec network"${x}" ip link set dev "${nic}"."${x}" up
-	ip netns exec network"${x}" ip link set dev "${nic}"."${x}" up
+devices=(pi4 pi3b jetson nanopi-neo3 nanopi-r5c nanopi-r2s nanopi-r1 asus2)
+qdiscs=(noqueue pfifo_fast fq fq_codel cake20 cake40)
 
-	echo ip netns exec network"${x}" ip address add 172.16."${x}".10/24 dev "${nic}"."${x}"
-	ip netns exec network"${x}" ip address add 172.16."${x}".10/24 dev "${nic}"."${x}"
+device_count=0
+for device in "${devices[@]}"; do
+	device_count=$((device_count + 1))
 
-	echo ip netns exec network"${x}" ip route add 0.0.0.0/0 via 172.16."${x}".1
-	ip netns exec network"${x}" ip route add 0.0.0.0/0 via 172.16."${x}".1
-	#ip netns exec network"$x" ip route add 172.16."$y".0/24 via 172.16."$x".1
+	qdisc_count=0
+	for qdisc in "${qdiscs[@]}"; do
+		qdisc_count=$((qdisc_count + 1))
 
-	echo ip link add link "${nic}" name "${nic}"."${y}" type vlan id "${y}"
-	ip link add link "${nic}" name "${nic}"."${y}" type vlan id "${y}"
+		namespace=$(((device_count * vlan_start) + qdisc_count))
 
-	echo ip netns add network"${y}"
-	ip netns add network"${y}"
+		vlan="${namespace}"
 
-	echo ip link set dev "${nic}"."${y}" netns network"${y}"
-	ip link set dev "${nic}"."${y}" netns network"${y}"
+		octet_a="${subnet_octet_a}"
+		octet_b=$((subnet_octet_b + device_count))
+		octet_c=$((qdisc_count))
 
-	echo ip netns exec network"${y}" ip link set dev "${nic}"."${y}" up
-	ip netns exec network"${y}" ip link set dev "${nic}"."${y}" up
+		nets=(x y)
+		net_count=0
+		for _ in "${nets[@]}"; do
+			net_count=$((net_count + 1))
 
-	echo ip netns exec network"${y}" ip address add 172.16."${y}".10/24 dev "${nic}"."${y}"
-	ip netns exec network"${y}" ip address add 172.16."${y}".10/24 dev "${nic}"."${y}"
+			case ${laptop} in
+			3rd)
+				echo "laptop 3rd"
+				if [[ ${net_count} == 2 ]]; then
+					echo "config complete"
+					continue
+				fi
+				;;
+			ryzen)
+				echo "laptop ryzen"
+				if [[ ${net_count} == 1 ]]; then
+					echo "skipping 1st network"
+					continue
+				fi
+				;;
+			esac
 
-	echo ip netns exec network"${y}" ip route add 0.0.0.0/0 via 172.16."${y}".1
-	ip netns exec network"${y}" ip route add 0.0.0.0/0 via 172.16."${y}".1
-	#ip netns exec network"$y" ip route add 172.16."$x".0/24 via 172.16."$y".1
+			if [[ ${net_count} == 2 ]]; then
+				vlan=$((vlan + vlan_addition))
+				octet_c=$((octet_c + vlan_addition))
+			fi
 
-	nets=("${x}" "${y}")
-	for net in "${nets[@]}"; do
+			octet_d=10
 
-		echo ip netns exec network"${net}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
-		ip netns exec network"${net}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
+			#echo "device:$device qdisc:$qdisc vlan:$vlan octet_a:$octet_a octet_b:$octet_b octet_c:$octet_c octet_d:$octet_d"
 
-		echo ip netns exec network"${net}" sysctl -w net.ipv4.tcp_timestamps=1
-		ip netns exec network"${net}" sysctl -w net.ipv4.tcp_timestamps=1
+			echo "device:${device} qdisc:${qdisc} namespace:${namespace} vlan:${vlan} ${octet_a}.${octet_b}.${octet_c}.${octet_d}/24"
 
-		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
-		ip netns exec network"${net}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
+			echo ip netns add network"${namespace}"
+			ip netns add network"${namespace}"
 
-		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
-		ip netns exec network"${net}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
+			echo "### Creating vlan interface"
+			echo ip link add link "${nic}" name "${vlan_dev}"."${vlan}" type vlan id "${vlan}"
+			ip link add link "${nic}" name "${vlan_dev}"."${vlan}" type vlan id "${vlan}"
 
-		echo ip netns exec network"${net}" sysctl net.ipv4.tcp_congestion_control=cubic
-		ip netns exec network"${net}" sysctl net.ipv4.tcp_congestion_control=cubic
+			echo "### Moving vlan interface to network namespace"
+			echo ip link set dev "${vlan_dev}"."${vlan}" netns network"${namespace}"
+			ip link set dev "${vlan_dev}"."${vlan}" netns network"${namespace}"
 
-		echo ip netns exec network"${net}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
-		ip netns exec network"${net}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
+			echo ip netns exec network"${namespace}" ip link set dev "${vlan_dev}"."${vlan}" up
+			ip netns exec network"${namespace}" ip link set dev "${vlan_dev}"."${vlan}" up
 
-		echo ip netns exec network"${net}" tc -s qdisc ls dev "${nic}"."${net}"
-		ip netns exec network"${net}" tc -s qdisc ls dev "${nic}"."${net}"
+			echo "### Configure ip address on vlan interface"
+			echo ip netns exec network"${namespace}" ip address add "${octet_a}"."${octet_b}"."${octet_c}"."${octet_d}"/24 dev "${vlan_dev}"."${vlan}"
+			ip netns exec network"${namespace}" ip address add "${octet_a}"."${octet_b}"."${octet_c}"."${octet_d}"/24 dev "${vlan_dev}"."${vlan}"
+
+			echo "### Configure default route"
+			echo ip netns exec network"${namespace}" ip route add 0.0.0.0/0 via "${octet_a}"."${octet_b}"."${octet_c}".1
+			ip netns exec network"${namespace}" ip route add 0.0.0.0/0 via "${octet_a}"."${octet_b}"."${octet_c}".1
+
+
+			echo "### Configure sysctls"
+			echo ip netns exec network"${namespace}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
+			ip netns exec network"${namespace}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
+
+			echo ip netns exec network"${namespace}" sysctl -w net.ipv4.tcp_timestamps=1
+			ip netns exec network"${namespace}" sysctl -w net.ipv4.tcp_timestamps=1
+
+			echo ip netns exec network"${namespace}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
+			ip netns exec network"${namespace}" sysctl net.ipv4.tcp_rmem="4096    1000000    16000000"
+
+			echo ip netns exec network"${namespace}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
+			ip netns exec network"${namespace}" sysctl net.ipv4.tcp_wmem="4096    1000000    16000000"
+
+			echo ip netns exec network"${namespace}" sysctl net.ipv4.tcp_congestion_control=cubic
+			ip netns exec network"${namespace}" sysctl net.ipv4.tcp_congestion_control=cubic
+
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq_codel
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq_codel
+
+			echo ip netns exec network"${namespace}" tc -s qdisc ls dev "${vlan_dev}"."${vlan}"
+			ip netns exec network"${namespace}" tc -s qdisc ls dev "${vlan_dev}"."${vlan}"
+
+			echo "### View config"
+			echo ip netns exec network"${namespace}" ip link show
+			ip netns exec network"${namespace}" ip link show
+
+			echo ip netns exec network"${namespace}" ip addr show
+			ip netns exec network"${namespace}" ip addr show
+
+			echo ip netns exec network"${namespace}" ip route show
+			ip netns exec network"${namespace}" ip route show
+
+			echo ip netns exec network"${namespace}" ping -w 1 -c "${ping_count}" "${octet_a}"."${octet_b}"."${octet_c}".1
+			ip netns exec network"${namespace}" ping -w 1 -c "${ping_count}" "${octet_a}"."${octet_b}"."${octet_c}".1
+
+		done
 
 	done
 
-	#
-	# show
-	#
-	echo "--------------------------------show"
-
-	echo ip netns exec network"${x}" ip link show
-	ip netns exec network"${x}" ip link show
-
-	echo ip netns exec network"${x}" ip addr show
-	ip netns exec network"${x}" ip addr show
-
-	echo ip netns exec network"${x}" ip route show
-	ip netns exec network"${x}" ip route show
-
-	echo ip netns exec network"${y}" ip link show
-	ip netns exec network"${y}" ip link show
-
-	echo ip netns exec network"${y}" ip addr show
-	ip netns exec network"${y}" ip addr show
-
-	echo ip netns exec network"${y}" ip route show
-	ip netns exec network"${y}" ip route show
-
-	#
-	# ping test
-	#
-	echo "--------------------------------ping"
-	count=5
-
-	echo ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${x}".1
-	ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${x}".1
-
-	echo ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${y}".1
-	ip netns exec network"${x}" ping -w 1 -c "${count}" 172.16."${y}".1
-
-	echo ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${y}".1
-	ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${y}".1
-
-	echo ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${x}".1
-	ip netns exec network"${y}" ping -w 1 -c "${count}" 172.16."${x}".1
-
 done
 
-ls /run/netns/network*
+echo find /run/netns/
+find /run/netns/
+
+echo find /run/netns/ | wc -l
+find /run/netns/ | wc -l
+

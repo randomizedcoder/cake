@@ -1,11 +1,18 @@
 #!/usr/bin/bash
 
-nic=$1
-x=$2
-y=$((x + 100))
-qdisc=$3
+device=$1
+nic=$2
+device_count=$3
 bandwidth=$4
-rtt=$5
+
+subnet_octet_a=172
+subnet_octet_b=16
+
+vlan_start=100
+vlan_addition=50
+
+# sub interface names are apparently limited to 11 chars
+vlan_dev=${nic:0:11}
 
 #-----------------------------------------------
 # system setup
@@ -19,123 +26,127 @@ sysctl -w net.ipv4.tcp_timestamps=1
 echo sysctl net.ipv4.ip_forward=1
 sysctl net.ipv4.ip_forward=1
 
-echo sysctl -w net.core.default_qdisc="${qdisc}"
-sysctl -w net.core.default_qdisc="${qdisc}"
+echo sysctl -w net.core.default_qdisc="pfifo_fast"
+sysctl -w net.core.default_qdisc="pfifo_fast"
 
-case ${qdisc} in
-pfifo_fast)
-	# https://www.man7.org/linux/man-pages/man8/tc-pfifo_fast.8.html
-	echo tc qdisc replace dev "${nic}" root pfifo_fast
-	tc qdisc replace dev "${nic}" root pfifo_fast
-	;;
-cake)
-	# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-	echo tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
-	tc qdisc replace dev "${nic}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
-	;;
-fq_codel)
-	# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
-	echo tc qdisc replace dev "${nic}" root fq_codel
-	tc qdisc replace dev "${nic}" root fq_codel
-	;;
-fq)
-	echo tc qdisc replace dev "${nic}" root fq
-	tc qdisc replace dev "${nic}" root fq
-	;;
-noqueue)
-	# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
-	echo tc qdisc replace dev "${nic}" root noqueue
-	tc qdisc replace dev "${nic}" root noqueue
-	;;
-*)
-	echo "unsupport qdisc"
-	;;
-esac
+qdiscs=(noqueue pfifo_fast fq fq_codel cake20 cake40)
 
-echo tc -s qdisc ls dev "${nic}"
-tc -s qdisc ls dev "${nic}"
+qdisc_count=0
+for qdisc in "${qdiscs[@]}"; do
+	qdisc_count=$((qdisc_count + 1))
 
-#-----------------------------------------------
+	namespace=$(((device_count * vlan_start) + qdisc_count))
 
-echo "### Creating network namespace"
-echo ip netns add network"${x}"
-ip netns add network"${x}"
+	vlan="${namespace}"
 
-echo ip netns exec network"${x}" sysctl -w net.ipv4.ip_forward=1
-ip netns exec network"${x}" sysctl -w net.ipv4.ip_forward=1
+	octet_a="${subnet_octet_a}"
+	octet_b=$((subnet_octet_b + device_count))
+	octet_c=$((qdisc_count))
 
-nets=("${x}" "${y}")
-for net in "${nets[@]}"; do
+	#-----------------------------------------------
 
-	echo "### Creating vlan interface"
-	echo ip link add link "${nic}" name "${nic}"."${net}" type vlan id "${net}"
-	ip link add link "${nic}" name "${nic}"."${net}" type vlan id "${net}"
+	echo "### Creating network namespace:network${namespace}"
+	echo ip netns add network"${namespace}"
+	ip netns add network"${namespace}"
 
-	echo "### Moving vlan interface to network namespace"
-	echo ip link set dev "${nic}"."${net}" netns network"${x}"
-	ip link set dev "${nic}"."${net}" netns network"${x}"
+	echo ip netns exec network"${namespace}" sysctl -w net.ipv4.ip_forward=1
+	ip netns exec network"${namespace}" sysctl -w net.ipv4.ip_forward=1
 
-	echo "### Configure cake qdisc"
-	case ${qdisc} in
-	pfifo_fast)
-		# https://www.man7.org/linux/man-pages/man8/tc-pfifo_fast.8.html
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root pfifo_fast
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root pfifo_fast
-		;;
-	cake)
-		# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root cake ether-vlan bandwidth "${bandwidth}" rtt "${rtt}"
-		;;
-	fq_codel)
-		# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq_codel
-		;;
-	fq)
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root fq
-		;;
-	noqueue)
-		echo ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root noqueue
-		ip netns exec network"${x}" tc qdisc replace dev "${nic}"."${net}" root noqueue
-		;;
-	*)
-		echo "unsupport qdisc"
-		;;
-	esac
+	nets=(x y)
+	net_count=0
+	for _ in "${nets[@]}"; do
+		net_count=$((net_count + 1))
 
-	echo ip netns exec network"${x}" tc -s qdisc ls dev "${nic}"."${net}"
-	ip netns exec network"${x}" tc -s qdisc ls dev "${nic}"."${net}"
+		if [[ ${net_count} == 2 ]]; then
+			vlan=$((vlan + vlan_addition))
+			octet_c=$((octet_c + vlan_addition))
+		fi
 
-	echo "### Configure ip address on vlan interface"
-	echo ip netns exec network"${x}" ip address add 172.16."${net}".1/24 dev "${nic}"."${net}"
-	ip netns exec network"${x}" ip address add 172.16."${net}".1/24 dev "${nic}"."${net}"
+		octet_d=1
 
-	echo "### Bring interface up"
-	echo ip netns exec network"${x}" ip link set dev "${nic}"."${net}" up
-	ip netns exec network"${x}" ip link set dev "${nic}"."${net}" up
+		#echo "device:$device qdisc:$qdisc vlan:$vlan octet_a:$octet_a octet_b:$octet_b octet_c:$octet_c octet_d:$octet_d"
 
-done
+		echo "device:${device} qdisc:${qdisc} vlan:${vlan} ${octet_a}.${octet_b}.${octet_c}.${octet_d}/24"
 
-echo "######### -----------------------"
+		echo "### Creating vlan interface"
+		echo ip link add link "${nic}" name "${vlan_dev}"."${vlan}" type vlan id "${vlan}"
+		ip link add link "${nic}" name "${vlan_dev}"."${vlan}" type vlan id "${vlan}"
 
-echo ip netns exec network"${x}" ip link show
-ip netns exec network"${x}" ip link show
+		echo "### Moving vlan interface to network namespace"
+		echo ip link set dev "${vlan_dev}"."${vlan}" netns network"${namespace}"
+		ip link set dev "${vlan_dev}"."${vlan}" netns network"${namespace}"
 
-echo "####"
-echo ip netns exec network"${x}" ip addr show
-ip netns exec network"${x}" ip addr show
+		#----------------------
 
-echo "####"
-echo ip netns exec network"${x}" ip route show
-ip netns exec network"${x}" ip route show
+		echo "### Configure cake qdisc"
+		case ${qdisc} in
+		noqueue)
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root noqueue
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root noqueue
+			;;
+		pfifo_fast)
+			# https://www.man7.org/linux/man-pages/man8/tc-pfifo_fast.8.html
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root pfifo_fast
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root pfifo_fast
+			;;
+		fq)
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq
+			;;
+		fq_codel)
+			# https://www.man7.org/linux/man-pages/man8/tc-fq_codel.8.html
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq_codel
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root fq_codel
+			;;
+		cake20)
+			# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root cake ether-vlan bandwidth "${bandwidth}" rtt 20ms
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root cake ether-vlan bandwidth "${bandwidth}" rtt 20ms
+			;;
+		cake40)
+			# https://www.man7.org/linux/man-pages/man8/tc-cake.8.html
+			echo ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root cake ether-vlan bandwidth "${bandwidth}" rtt 40ms
+			ip netns exec network"${namespace}" tc qdisc replace dev "${vlan_dev}"."${vlan}" root cake ether-vlan bandwidth "${bandwidth}" rtt 40ms
+			;;
+		*)
+			echo "unsupport qdisc"
+			;;
+		esac
 
-for net in "${nets[@]}"; do
+		echo ip netns exec network"${namespace}" tc -s qdisc ls dev "${vlan_dev}"."${vlan}"
+		ip netns exec network"${namespace}" tc -s qdisc ls dev "${vlan_dev}"."${vlan}"
+
+		echo "### Configure ip address on vlan interface"
+		echo ip netns exec network"${namespace}" ip address add "${octet_a}"."${octet_b}"."${octet_c}"."${octet_d}"/24 dev "${vlan_dev}"."${vlan}"
+		ip netns exec network"${namespace}" ip address add "${octet_a}"."${octet_b}"."${octet_c}"."${octet_d}"/24 dev "${vlan_dev}"."${vlan}"
+
+		echo "### Bring interface up"
+		echo ip netns exec network"${namespace}" ip link set dev "${vlan_dev}"."${vlan}" up
+		ip netns exec network"${namespace}" ip link set dev "${vlan_dev}"."${vlan}" up
+
+		echo "######### -----------------------"
+
+		echo ip netns exec network"${namespace}" ping -c 3 -w 1 ${octet_a}.${octet_b}.${octet_c}.10
+
+	done
 
 	echo "######### -----------------------"
 
-	echo ip netns exec network"${x}" ping -c 3 -w 1 172.16."${net}".10
-	ip netns exec network"${x}" ping -c 3 -w 1 172.16."${net}".10
+	echo ip netns exec network"${namespace}" ip link show
+	ip netns exec network"${namespace}" ip link show
+
+	echo "####"
+	echo ip netns exec network"${namespace}" ip addr show
+	ip netns exec network"${namespace}" ip addr show
+
+	echo "####"
+	echo ip netns exec network"${namespace}" ip route show
+	ip netns exec network"${namespace}" ip route show
 
 done
+
+echo find /run/netns/
+find /run/netns/
+
+echo find /run/netns/ | wc -l
+find /run/netns/ | wc -l

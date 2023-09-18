@@ -1,36 +1,39 @@
 Host 3rd
-	Hostname 172.16.50.218
-	User das
+        Hostname 172.16.40.57
+        User das
 Host ryzen
-	Hostname 172.16.50.105
-	User das
+        Hostname 172.16.40.58
+        User das
 Host pi4
-	Hostname 172.16.50.124
-	User das
+        Hostname 172.16.40.52
+        User das
 Host pi3b
-	Hostname 172.16.50.113
-	User das
+        Hostname 172.16.40.51
+        User das
 Host jetson
-	Hostname 172.16.50.248
-	User das
+        Hostname 172.16.40.59
+        User das
 Host nanopi-neo3
-	Hostname 172.16.50.177
-	User das
+        Hostname 172.16.40.55
+        User das
 Host nanopi-r5c
-	Hostname 172.16.50.156
-	User das
-Host asus1
-	Hostname 172.16.50.101
-	User das
+        Hostname 172.16.40.53
+        User das
+Host nanopi-r2s
+        Hostname 172.16.40.56
+        User das
+Host nanopi-r1
+        Hostname 172.16.40.54
+        User das
 Host asus2
-	Hostname 172.16.50.96
-	User das
+        Hostname 172.16.40.60
+        User das
 
-Host cisco2
-    Hostname 172.16.50.9
-    User root
-    #Legacy changes
-    KexAlgorithms +diffie-hellman-group1-sha1
-    Ciphers +aes128-cbc
-    HostKeyAlgorithms=+ssh-rsa
-    MACs hmac-sha1
+Host cisco3
+        Hostname 172.16.50.10
+        User root
+        #Legacy changes
+        KexAlgorithms +diffie-hellman-group1-sha1
+        Ciphers +aes128-cbc
+        HostKeyAlgorithms=+ssh-rsa
+        MACs hmac-sha1
