@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
-device=jetson
+device=nanopi_r1
 nic=eth0
-device_count=3
+device_count=6
 bandwidth="1gbit"
 #"100mbit"
 

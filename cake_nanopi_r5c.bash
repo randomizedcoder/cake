@@ -1,18 +1,9 @@
 #!/usr/bin/bash
 
+device=nanopi_r5c
 nic=eth0
-x=104
-qdisc="cake"
+device_count=4
 bandwidth="1gbit"
 #"100mbit"
-rtt="3ms"
 
-if [[ -n $1 ]]; then
-	qdisc=$1
-fi
-
-if [[ -n $2 ]]; then
-	rtt=$2
-fi
-
-./cake_setup_routing_device.bash "${nic}" "${x}" "${qdisc}" "${bandwidth}" "${rtt}"
+./cake_setup_routing_device.bash "${device}" "${nic}" "${device_count}" "${bandwidth}"

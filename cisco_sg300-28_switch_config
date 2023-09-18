@@ -1,0 +1,124 @@
+<!-- sg300-20#sh ver
+SW version    1.4.11.5 ( date  08-Apr-2020 time  13:49:34 )
+Boot version    1.3.5.06 ( date  21-Jul-2013 time  15:12:10 )
+HW version    V02 -->
+!
+port jumbo-frame
+vlan database
+vlan 2,20,30,40,100-106,200-206,300-306,400-406,500-506,600-606
+vlan 700-706,800-806,900-906,1000-1006
+!
+interface gigabitethernet1
+ description lenovo3rd-blue
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet2
+ description jetson-grey
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+!
+!
+interface gigabitethernet7
+ description nanopiR5C-black-purple_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet8
+ description nanopiR2S-black-pink_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet9
+ description nanopiR1-yellow-red_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet10
+ description nanopiNEO3-white-blue_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet11
+ description pi3b-purple_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet12
+ description pi4-yellow_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+!
+!
+interface gigabitethernet19
+ description asus-cn60-2-green_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet20
+ description LicheePi-4A-riscV-grey_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!
+interface gigabitethernet27
+ description ryzen-blue_cable
+ spanning-tree portfast
+ switchport trunk allowed vlan add 100-109,150-159,200-209,250-259
+ switchport trunk allowed vlan add 300-309,350-359,400-409,450-459
+ switchport trunk allowed vlan add 500-509,550-559,600-609,650-659
+ switchport trunk allowed vlan add 700-709,750-759,800-809,850-859
+ switchport trunk allowed vlan add 900-909,950-959,1000-1009,1050-1059
+ switchport trunk native vlan 40
+!

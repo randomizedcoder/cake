@@ -1,18 +1,9 @@
 #!/usr/bin/bash
 
-nic=eth0
-x=101
-qdisc="cake"
+device=pi3b
+nic=enxb827eb7039cb
+device_count=2
 #bandwidth="1gbit"
 bandwidth="100mbit"
-rtt="3ms"
 
-if [[ -n $1 ]]; then
-	qdisc=$1
-fi
-
-if [[ -n $2 ]]; then
-	rtt=$2
-fi
-
-./cake_setup_routing_device.bash "${nic}" "${x}" "${qdisc}" "${bandwidth}" "${rtt}"
+./cake_setup_routing_device.bash "${device}" "${nic}" "${device_count}" "${bandwidth}"
