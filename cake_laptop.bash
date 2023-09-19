@@ -14,7 +14,7 @@ ryzen)
 	echo "laptop ryzen"
 	;;
 *)
-	echo "Please pass \"3rd\" or \"ryzen\""
+	echo 'Please pass "3rd" or "ryzen"'
 	exit 1
 	;;
 esac
@@ -79,6 +79,10 @@ for device in "${devices[@]}"; do
 					continue
 				fi
 				;;
+			*)
+				echo 'Please pass "3rd" or "ryzen"'
+				exit 1
+				;;
 			esac
 
 			if [[ ${net_count} == 2 ]]; then
@@ -113,7 +117,6 @@ for device in "${devices[@]}"; do
 			echo "### Configure default route"
 			echo ip netns exec network"${namespace}" ip route add 0.0.0.0/0 via "${octet_a}"."${octet_b}"."${octet_c}".1
 			ip netns exec network"${namespace}" ip route add 0.0.0.0/0 via "${octet_a}"."${octet_b}"."${octet_c}".1
-
 
 			echo "### Configure sysctls"
 			echo ip netns exec network"${namespace}" sysctl -w net.ipv4.ip_local_port_range="1025 65535"
@@ -161,4 +164,3 @@ find /run/netns/
 
 echo find /run/netns/ | wc -l
 find /run/netns/ | wc -l
-
