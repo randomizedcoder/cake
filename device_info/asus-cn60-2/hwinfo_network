@@ -1,0 +1,43 @@
+21: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: QObM.ndpeucax6V1
+  Parent ID: lkKU.idRRkIWXlKD
+  SysFS ID: /class/net/enp1s0
+  SysFS Device Link: /devices/pci0000:00/0000:00:1c.0/0000:01:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8169"
+  Driver Modules: "r8169"
+  Device File: enp1s0
+  HW Address: c4:54:44:8c:87:5f
+  Permanent HW Address: c4:54:44:8c:87:5f
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #7 (Ethernet controller)
+
+22: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+23: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: VV91.ndpeucax6V1
+  Parent ID: qru8.h+HTJseO+y2
+  SysFS ID: /class/net/wlp2s0
+  SysFS Device Link: /devices/pci0000:00/0000:00:1c.1/0000:02:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "ath9k"
+  Driver Modules: "ath9k", "ath9k"
+  Device File: wlp2s0
+  HW Address: 54:27:1e:e7:eb:92
+  Permanent HW Address: 54:27:1e:e7:eb:92
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #4 (Ethernet controller)

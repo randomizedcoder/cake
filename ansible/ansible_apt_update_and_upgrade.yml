@@ -1,0 +1,11 @@
+---
+- name: Apt upgrade
+  hosts: "{{ host }}"
+  strategy: free
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Update System Package Cache
+      apt: update_cache=yes
+    - name: Upgrade System Packages
+      apt: upgrade=full

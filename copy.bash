@@ -1,37 +1,38 @@
 #!/usr/bin/bash
 
-scp cake_3rd.bash 3rd:
-scp cake_laptop.bash 3rd:
-scp start_netserver_laptop.bash 3rd:
-scp start_flent_laptop.bash 3rd:
-scp start_iperf_server_laptop.bash 3rd:
-scp start_iperf_client_laptop.bash 3rd:
+readarray -t laptops <./script_configuration/laptops.txt
+echo "laptops:${laptops[*]}"
+for laptop in "${laptops[@]}"; do
 
-scp cake_ryzen.bash ryzen:
-scp cake_laptop.bash ryzen:
-scp start_netserver_laptop.bash ryzen:
-scp start_flent_laptop.bash ryzen:
-scp start_iperf_server_laptop.bash ryzen:
-scp start_iperf_client_laptop.bash ryzen:
+	echo "## Copy files to laptop:${laptop}"
+	scp ./configure_device_scripts/qdisc_"${laptop}".bash "${laptop}":
+	scp ./configure_device_scripts/qdisc_laptop.bash "${laptop}":
 
-# scp 3rd:*.flent.gz ./flent/
-# scp 3rd:*.png ./pngs/
+	echo "## Rsyncing cake directory to laptop:${laptop}"
+	echo rsync -davz --exclude '.git' ./ "${laptop}":/home/das/Downloads/cake/
+	rsync -davz --exclude '.git' ./ "${laptop}":/home/das/Downloads/cake/
 
-# scp ansible_get_facts.yml 3rd:
+done
 
-echo "copying device specific configuration"
-scp cake_pi4.bash pi4:
-scp cake_pi3b.bash pi3b:
-scp cake_jetson.bash jetson:
-scp cake_nanopi_neo3.bash nanopi-neo3:
-scp cake_nanopi_r5c.bash nanopi-r5c:
-scp cake_nanopi_r2s.bash nanopi-r2s:
-scp cake_nanopi_r1.bash nanopi-r1:
-scp cake_asus_cn60.bash asus2:
+echo "## Copy ansible config"
+echo scp ./ansible/ansible.cfg 3rd:.ansible.cfg
+scp ./ansible/ansible.cfg 3rd:.ansible.cfg
 
-devices=(pi4 pi3b jetson nanopi-neo3 nanopi-r5c nanopi-r2s nanopi-r1 asus2)
+readarray -t devices <./script_configuration/devices.txt
+#devices=(pi4 pi3b jetson-nano nanopi-neo3 nanopi-r5c nanopi-r2s nanopi-r1 asus-cn60-2)
+echo "devices:${devices[*]}"
 
 for device in "${devices[@]}"; do
-	echo scp cake_setup_routing_device.bash "${device}":
-	scp cake_setup_routing_device.bash "${device}":
+
+	echo "## Copying device specific configuration:${device}"
+	echo scp ./configure_device_scripts/qdisc_"${device}".bash "${device}":
+	scp ./configure_device_scripts/qdisc_"${device}".bash "${device}":
+
+	echo "## Copying generic configuration script to:${device}"
+	echo scp ./configure_device_scripts/qdisc_setup_routing_device.bash "${device}":
+	scp ./configure_device_scripts/qdisc_setup_routing_device.bash "${device}":
+
+	echo scp ./configure_device_scripts/qdisc.bash "${device}":
+	scp ./configure_device_scripts/qdisc.bash "${device}":
+
 done

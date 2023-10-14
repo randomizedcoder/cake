@@ -1,0 +1,26 @@
+10: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: usDW.ndpeucax6V1
+  Parent ID: rBUF.L0oBgXRSkm1
+  SysFS ID: /class/net/eth0
+  SysFS Device Link: /devices/platform/1003000.pcie/pci0000:00/0000:00:02.0/0000:01:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8169"
+  Driver Modules: "r8169"
+  Device File: eth0
+  HW Address: 48:b0:2d:2e:09:0b
+  Permanent HW Address: 48:b0:2d:2e:09:0b
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)
+
+11: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown

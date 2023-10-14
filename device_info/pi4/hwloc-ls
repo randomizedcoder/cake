@@ -1,0 +1,11 @@
+Machine (7635MB total)
+  Package L#0
+    NUMANode L#0 (P#0 7635MB)
+    L2 L#0 (1024KB)
+      L1d L#0 (32KB) + L1i L#0 (48KB) + Core L#0 + PU L#0 (P#0)
+      L1d L#1 (32KB) + L1i L#1 (48KB) + Core L#1 + PU L#1 (P#1)
+      L1d L#2 (32KB) + L1i L#2 (48KB) + Core L#2 + PU L#2 (P#2)
+      L1d L#3 (32KB) + L1i L#3 (48KB) + Core L#3 + PU L#3 (P#3)
+  Block "mmcblk0"
+  Net "wlan0"
+  Net "eth0"

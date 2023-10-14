@@ -1,0 +1,12 @@
+0001:10:00.0 PCI bridge: Fuzhou Rockchip Electronics Co., Ltd Device 3566 (rev 01)
+	Kernel driver in use: pcieport
+0001:11:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8125 2.5GbE Controller (rev 05)
+	Subsystem: Realtek Semiconductor Co., Ltd. RTL8125 2.5GbE Controller
+	Kernel driver in use: r8125
+	Kernel modules: r8169, r8125
+0002:20:00.0 PCI bridge: Fuzhou Rockchip Electronics Co., Ltd Device 3566 (rev 01)
+	Kernel driver in use: pcieport
+0002:21:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8125 2.5GbE Controller (rev 05)
+	Subsystem: Realtek Semiconductor Co., Ltd. RTL8125 2.5GbE Controller
+	Kernel driver in use: r8125
+	Kernel modules: r8169, r8125

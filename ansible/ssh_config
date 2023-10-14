@@ -1,0 +1,60 @@
+Host 3rd
+        Hostname 172.16.40.57
+        User das
+Host ryzen
+        Hostname 172.16.40.58
+        User das
+Host pi4
+        Hostname 172.16.40.52
+        User das
+Host pi3b
+        Hostname 172.16.40.51
+        User das
+Host jetson-nano
+        Hostname 172.16.40.59
+        User das
+Host nanopi-neo3
+        Hostname 172.16.40.55
+        User das
+Host nanopi-r5c
+        Hostname 172.16.40.53
+        User das
+Host nanopi-r2s
+        Hostname 172.16.40.56
+        User das
+Host nanopi-r1
+        Hostname 172.16.40.62
+        User das
+Host asus-cn60-2
+        Hostname 172.16.40.60
+        User das
+Host lpi4a
+        Hostname 172.16.40.63
+        User das
+
+Host 3750x
+        Hostname 172.16.40.64
+        User cisco
+        #Legancy algos for crappy old krisco device
+        KexAlgorithms +diffie-hellman-group1-sha1
+        Ciphers +aes128-cbc
+        HostKeyAlgorithms=+ssh-rsa
+        MACs hmac-sha1
+
+Host *
+	User das
+	KeepAlive yes
+	ServerAliveInterval 10
+	Protocol 2
+	#UseRoaming no
+	ForwardAgent yes
+	KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+	Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+	# temp hmac-md5
+	#MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-md5
+	MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256
+	ControlMaster auto
+	ControlPath ~/.ssh/master-%r@%h:%p
+	ControlPersist 10m
+	Compression yes
+	Connecttimeout 10

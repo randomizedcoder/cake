@@ -1,0 +1,9 @@
+pi4
+pi3b
+jetson-nano
+nanopi-neo3
+nanopi-r5c
+nanopi-r2s
+nanopi-r1
+asus-cn60-2
+lpi4a

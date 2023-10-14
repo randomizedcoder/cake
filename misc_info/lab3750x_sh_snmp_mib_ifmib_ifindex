@@ -1,0 +1,103 @@
+https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/200312-SNMPWALK-for-Serial-Interface-Utilizatio.html
+
+https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/26007-faq-snmpcounter.html
+
+https://net-snmp.sourceforge.io/wiki/index.php/TUT:Using_and_loading_MIBS
+
+ifMIB.ifMIBObjects.ifXTable.ifXEntry.ifHCInOctets.1
+
+das@t:~$ snmpwalk -v2c -c public 172.16.40.64 ifMIB.ifMIBObjects.ifXTable.ifXEntry.ifHCInOctets.10101
+IF-MIB::ifHCInOctets.10101 = Counter64: 0
+
+snmpwalk -v2c -c public 172.16.40.64 .1.3.6.1.2.1.31.1.1.1.6.10101
+
+das@3rd:~/Downloads/cake/cmd/run_qdiscs_tests$ snmpwalk -v2c -c public 3750x IF-MIB::ifInErrors.10101
+IF-MIB::ifInErrors.10101 = Counter32: 0
+das@3rd:~/Downloads/cake/cmd/run_qdiscs_tests$ snmpwalk -v2c -c public 3750x IF-MIB::ifOutDiscards.10101
+IF-MIB::ifOutDiscards.10101 = Counter32: 0
+
+
+ifHCInOctets(.1.3.6.1.2.1.31.1.1.1.6)
+ifHCOutOctets(1.3.6.1.2.1.31.1.1.1.10)
+
+ifHCInUcastPkts(.1.3.6.1.2.1.31.1.1.1.7)
+ifHCOutUcastPkts(.1.3.6.1.2.1.31.1.1.1.11)
+
+ifInDiscards (.1.3.6.1.2.1.2.2.1.13)
+ifInErrors (.1.3.6.1.2.1.2.2.1.14)
+ifOutDiscards (.1.3.6.1.2.1.2.2.1.19)
+ifOutErrors (.1.3.6.1.2.1.2.2.1.20)
+
+lab3750x#sh snmp mib ifmib ifindex
+GigabitEthernet1/0/39: Ifindex = 10139
+GigabitEthernet1/1/4: Ifindex = 10304
+GigabitEthernet1/0/28: Ifindex = 10128
+GigabitEthernet1/0/19: Ifindex = 10119
+GigabitEthernet1/1/2: Ifindex = 10302
+Vlan2: Ifindex = 2
+Vlan40: Ifindex = 40
+Tunnel0: Ifindex = 24567
+GigabitEthernet1/0/48: Ifindex = 10148
+GigabitEthernet1/0/8: Ifindex = 10108
+GigabitEthernet1/0/31: Ifindex = 10131
+GigabitEthernet1/0/22: Ifindex = 10122
+TenGigabitEthernet1/1/1: Ifindex = 10401
+GigabitEthernet1/0/33: Ifindex = 10133
+StackSub-St1-1: Ifindex = 5180
+GigabitEthernet1/0/20: Ifindex = 10120
+GigabitEthernet1/0/6: Ifindex = 10106
+GigabitEthernet1/0/44: Ifindex = 10144
+GigabitEthernet1/0/11: Ifindex = 10111
+GigabitEthernet1/0/4: Ifindex = 10104
+GigabitEthernet1/0/46: Ifindex = 10146
+GigabitEthernet1/0/13: Ifindex = 10113
+GigabitEthernet1/0/35: Ifindex = 10135
+FastEthernet0: Ifindex = 14502
+GigabitEthernet1/0/26: Ifindex = 10126
+GigabitEthernet1/0/37: Ifindex = 10137
+GigabitEthernet1/0/24: Ifindex = 10124
+GigabitEthernet1/0/2: Ifindex = 10102
+StackPort1: Ifindex = 5179
+GigabitEthernet1/0/40: Ifindex = 10140
+GigabitEthernet1/0/15: Ifindex = 10115
+GigabitEthernet1/0/42: Ifindex = 10142
+GigabitEthernet1/0/17: Ifindex = 10117
+GigabitEthernet1/0/38: Ifindex = 10138
+Null0: Ifindex = 14501
+GigabitEthernet1/0/29: Ifindex = 10129
+GigabitEthernet1/0/18: Ifindex = 10118
+GigabitEthernet1/1/3: Ifindex = 10303
+GigabitEthernet1/1/1: Ifindex = 10301
+Vlan1: Ifindex = 1
+GigabitEthernet1/0/9: Ifindex = 10109
+GigabitEthernet1/0/23: Ifindex = 10123
+GigabitEthernet1/0/30: Ifindex = 10130
+TenGigabitEthernet1/1/2: Ifindex = 10402
+StackSub-St1-2: Ifindex = 5181
+GigabitEthernet1/0/21: Ifindex = 10121
+GigabitEthernet1/0/32: Ifindex = 10132
+GigabitEthernet1/0/10: Ifindex = 10110
+GigabitEthernet1/0/7: Ifindex = 10107
+GigabitEthernet1/0/45: Ifindex = 10145
+GigabitEthernet1/0/12: Ifindex = 10112
+GigabitEthernet1/0/5: Ifindex = 10105
+GigabitEthernet1/0/47: Ifindex = 10147
+GigabitEthernet1/0/27: Ifindex = 10127
+GigabitEthernet1/0/34: Ifindex = 10134
+GigabitEthernet1/0/25: Ifindex = 10125
+GigabitEthernet1/0/36: Ifindex = 10136
+GigabitEthernet1/0/14: Ifindex = 10114
+GigabitEthernet1/0/3: Ifindex = 10103
+GigabitEthernet1/0/41: Ifindex = 10141
+GigabitEthernet1/0/16: Ifindex = 10116
+GigabitEthernet1/0/1: Ifindex = 10101
+GigabitEthernet1/0/43: Ifindex = 10143
+
+
+das@3rd:~/Downloads/cake/cmd/run_qdiscs_tests$ snmpwalk -v2c -c public 3750x 1.3.6.1.4.1.9.9.13.1.3.1.2
+SNMPv2-SMI::enterprises.9.9.13.1.3.1.2.1006 = STRING: "SW#1, Sensor#1, GREEN "
+das@3rd:~/Downloads/cake/cmd/run_qdiscs_tests$ snmpwalk -v2c -c public 3750x 1.3.6.1.4.1.9.9.13.1.3.1.3
+SNMPv2-SMI::enterprises.9.9.13.1.3.1.3.1006 = Gauge32: 27
+
+
+https://www.10-strike.com/network-monitor/pro/useful-snmp-oids.shtml

@@ -1,0 +1,26 @@
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+    RX:  bytes packets errors dropped  missed   mcast           
+       1820992   36326      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+       1820992   36326      0       0       0       0 
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether c4:54:44:8c:87:5f brd ff:ff:ff:ff:ff:ff
+    inet 172.16.40.60/24 metric 100 brd 172.16.40.255 scope global dynamic enp1s0
+       valid_lft 50241sec preferred_lft 50241sec
+    inet6 fe80::c654:44ff:fe8c:875f/64 scope link 
+       valid_lft forever preferred_lft forever
+    RX:    bytes   packets errors dropped  missed   mcast           
+    103933060173 100265037      0       7    7099  541326 
+    TX:    bytes   packets errors dropped carrier collsns           
+    103699709252  99615739      0       0       0       0 
+3: wlp2s0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 54:27:1e:e7:eb:92 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+             0       0      0       0       0       0 

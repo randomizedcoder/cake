@@ -1,0 +1,58 @@
+25: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: 5WpM.ndpeucax6V1
+  Parent ID: Euci.TfPFe67fIBB
+  SysFS ID: /class/net/end0
+  SysFS Device Link: /devices/platform/soc/1c30000.ethernet
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "dwmac-sun8i"
+  Driver Modules: "dwmac_sun8i"
+  Device File: end0
+  HW Address: 02:81:49:77:cc:9b
+  Permanent HW Address: 02:81:49:77:cc:9b
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #4 (Ethernet controller)
+
+26: None 00.0: 1070a WLAN
+  [Created at net.126]
+  Unique ID: AYEt.QXn1l67RSa1
+  Parent ID: rtwI.TfPFe67fIBB
+  SysFS ID: /class/net/wlan0
+  SysFS Device Link: /devices/platform/soc/1c10000.mmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1
+  Hardware Class: network interface
+  Model: "WLAN network interface"
+  Driver: "rtl8189es"
+  Device File: wlan0
+  HW Address: 7c:c7:09:a4:b8:78
+  Permanent HW Address: 7c:c7:09:a4:b8:78
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #12 (Ethernet controller)
+
+27: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+28: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: usDW.ndpeucax6V1
+  Parent ID: +QAA.TfPFe67fIBB
+  SysFS ID: /class/net/eth0
+  SysFS Device Link: /devices/platform/soc/1c1b000.usb/usb3/3-1/3-1:1.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8152"
+  Driver Modules: "r8152"
+  Device File: eth0
+  HW Address: 02:36:c9:76:6d:75
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)

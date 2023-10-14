@@ -1,0 +1,34 @@
+           CPU0       CPU1       
+  8:          0          0   IO-APIC   8-edge      rtc0
+  9:          0          0   IO-APIC   9-fasteoi   acpi
+ 18:          0          2   IO-APIC  18-fasteoi   i801_smbus
+ 19:          0          0   IO-APIC  19-fasteoi   ath9k
+ 40:          0          0   PCI-MSI 458752-edge      PCIe PME
+ 41:          0          0   PCI-MSI 460800-edge      PCIe PME
+ 42:          0          0   PCI-MSI 462848-edge      PCIe PME
+ 43:      30208          0   PCI-MSI 512000-edge      ahci[0000:00:1f.2]
+ 44:          0        176   PCI-MSI 327680-edge      xhci_hcd
+ 45:   39843046          0   PCI-MSI 524288-edge      enp1s0
+ 46:         32          0   PCI-MSI 32768-edge      i915
+ 47:          0         13   PCI-MSI 360448-edge      mei_me
+ 48:        102          0   PCI-MSI 49152-edge      snd_hda_intel:card0
+ 49:          0        354   PCI-MSI 442368-edge      snd_hda_intel:card1
+NMI:        102         15   Non-maskable interrupts
+LOC:   35754294    1169795   Local timer interrupts
+SPU:          0          0   Spurious interrupts
+PMI:        102         15   Performance monitoring interrupts
+IWI:         32          0   IRQ work interrupts
+RTR:          0          0   APIC ICR read retries
+RES:       7576       8479   Rescheduling interrupts
+CAL:       7729      13222   Function call interrupts
+TLB:         51         28   TLB shootdowns
+TRM:          0          0   Thermal event interrupts
+THR:          0          0   Threshold APIC interrupts
+DFR:          0          0   Deferred Error APIC interrupts
+MCE:          0          0   Machine check exceptions
+MCP:        117        118   Machine check polls
+ERR:          0
+MIS:          0
+PIN:          0          0   Posted-interrupt notification event
+NPI:          0          0   Nested posted-interrupt event
+PIW:          0          0   Posted-interrupt wakeup event

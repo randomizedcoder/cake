@@ -1,0 +1,23 @@
+lab3750x#show lldp neighbors 
+Capability codes:
+    (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+    (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+
+Device ID           Local Intf     Hold-time  Capability      Port ID
+lab3750x.3750x.lab.oFa0            120        B,R             Gi1/0/47
+lab3750x.3750x.lab.oGi1/0/47       120        B,R             Fa0
+lpi4a               Gi1/0/32       120        S               48da.3560.0008
+UAP-AC-Pro-Gen2     Gi1/0/48       120        B,W,R           fcec.daf3.22b0
+pi3b                Gi1/0/27       120        W,R             b827.eb70.39cb
+ryzen               Gi1/0/35       120        B,W,R           84a9.389b.7a5c
+jetson-nano         Gi1/0/29       120        R               48b0.2d2e.090b
+3rd                 Gi1/0/36       120        W               54ee.7568.d04c
+asus-cn60-2         Gi1/0/28       120        W               c454.448c.875f
+NanoPi-R5C          Gi1/0/31       120        S               fad9.30ff.7f4b
+pi4                 Gi1/0/25       120        W               e45f.0142.a10f
+nanopi-r2s          Gi1/0/33       120        S               36e6.2aca.63c7
+nanopi-r1           Gi1/0/30       120        W               0281.4977.cc9b
+nanopi-neo3         Gi1/0/26       120        S               1679.e633.83d6
+
+Total entries displayed: 14
+

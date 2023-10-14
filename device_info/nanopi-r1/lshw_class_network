@@ -1,0 +1,27 @@
+  *-network:0
+       description: Ethernet interface
+       physical id: d
+       logical name: end0
+       serial: 02:81:49:77:cc:9b
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=st_mac100 driverversion=6.1.53-current-sunxi duplex=full ip=172.16.40.62 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+  *-network:1
+       description: Ethernet interface
+       physical id: e
+       bus info: usb@3:1
+       logical name: eth0
+       serial: 02:36:c9:76:6d:75
+       size: 10Mbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8152 driverversion=v1.12.13 duplex=half firmware=rtl8153b-2 v1 10/23/19 link=no multicast=yes port=MII speed=10Mbit/s
+  *-network:2
+       description: Wireless interface
+       physical id: f
+       bus info: mmc@1:0001:1
+       logical name: wlan0
+       serial: 7c:c7:09:a4:b8:78
+       capabilities: ethernet physical wireless
+       configuration: broadcast=yes driver=rtl8189es driverversion=6.1.53-current-sunxi multicast=yes wireless=unassociated

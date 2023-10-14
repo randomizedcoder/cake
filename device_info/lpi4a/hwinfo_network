@@ -1,0 +1,102 @@
+20: None 00.0: 1070a WLAN
+  [Created at net.126]
+  Unique ID: AYEt.QXn1l67RSa1
+  Parent ID: udxH.TfPFe67fIBB
+  SysFS ID: /class/net/wlan0
+  SysFS Device Link: /devices/platform/soc/ffe70a0000.sd/mmc_host/mmc2/mmc2:0001/mmc2:0001:1
+  Hardware Class: network interface
+  Model: "WLAN network interface"
+  Driver: "rtl8723ds"
+  Device File: wlan0
+  HW Address: 5a:48:9c:80:32:ea
+  Permanent HW Address: 2c:05:47:e8:11:02
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #5 (Ethernet controller)
+
+21: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+22: None 01.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: Yh3R.ndpeucax6V1
+  Parent ID: EeWZ.TfPFe67fIBB
+  SysFS ID: /class/net/end1
+  SysFS Device Link: /devices/platform/soc/ffe7060000.ethernet
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "light_dwmac_eth"
+  Device File: end1
+  HW Address: 48:da:35:60:00:09
+  Permanent HW Address: 48:da:35:60:00:09
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)
+
+23: None 00.0: 10781 Network Interface
+  [Created at net.126]
+  Unique ID: wl2P.nfEXJulusj6
+  SysFS ID: /class/net/sit0
+  Hardware Class: network interface
+  Model: "Network Interface"
+  Device File: sit0
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+24: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: pG9W.ndpeucax6V1
+  Parent ID: udxH.TfPFe67fIBB
+  SysFS ID: /class/net/p2p0
+  SysFS Device Link: /devices/platform/soc/ffe70a0000.sd/mmc_host/mmc2/mmc2:0001/mmc2:0001:1
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "rtl8723ds"
+  Device File: p2p0
+  HW Address: 16:cd:6d:b3:36:c4
+  Permanent HW Address: 2e:05:47:e8:11:02
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #6 (Ethernet controller)
+
+25: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: 5WpM.ndpeucax6V1
+  Parent ID: u1OT.TfPFe67fIBB
+  SysFS ID: /class/net/end0
+  SysFS Device Link: /devices/platform/soc/ffe7070000.ethernet
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "light_dwmac_eth"
+  Device File: end0
+  HW Address: 48:da:35:60:00:08
+  Permanent HW Address: 48:da:35:60:00:08
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #2 (Ethernet controller)
+
+26: None 00.0: 10780 Network Interface
+  [Created at net.126]
+  Unique ID: b8Rv.GSopYcFr9cF
+  SysFS ID: /class/net/ip_vti0
+  Hardware Class: network interface
+  Model: "Network Interface"
+  Device File: ip_vti0
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+27: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: WVs7.ndpeucax6V1
+  SysFS ID: /class/net/dummy0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "dummy"
+  Device File: dummy0
+  HW Address: 16:5e:28:67:98:00
+  Config Status: cfg=new, avail=yes, need=no, active=unknown

@@ -1,0 +1,26 @@
+13: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+14: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: 5WpM.ndpeucax6V1
+  Parent ID: a2vm.TfPFe67fIBB
+  SysFS ID: /class/net/end0
+  SysFS Device Link: /devices/platform/ff540000.ethernet
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "rk_gmac-dwmac"
+  Driver Modules: "dwmac_rk"
+  Device File: end0
+  HW Address: 16:79:e6:33:83:d6
+  Permanent HW Address: 16:79:e6:33:83:d6
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #3 (Ethernet controller)

@@ -1,0 +1,43 @@
+14: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+15: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: _FwM.ndpeucax6V1
+  Parent ID: FHkD.TfPFe67fIBB
+  SysFS ID: /class/net/enx36e62aca63e7
+  SysFS Device Link: /devices/platform/ff600000.usb/xhci-hcd.0.auto/usb3/3-1/3-1:1.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8152"
+  Driver Modules: "r8152"
+  Device File: enx36e62aca63e7
+  HW Address: 36:e6:2a:ca:63:e7
+  Permanent HW Address: 36:e6:2a:ca:63:e7
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)
+
+16: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: 5WpM.ndpeucax6V1
+  Parent ID: a2vm.TfPFe67fIBB
+  SysFS ID: /class/net/end0
+  SysFS Device Link: /devices/platform/ff540000.ethernet
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "rk_gmac-dwmac"
+  Driver Modules: "dwmac_rk"
+  Device File: end0
+  HW Address: 36:e6:2a:ca:63:c7
+  Permanent HW Address: 36:e6:2a:ca:63:c7
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #3 (Ethernet controller)

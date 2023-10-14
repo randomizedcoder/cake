@@ -1,0 +1,19 @@
+Machine (3904MB total)
+  Package L#0
+    NUMANode L#0 (P#0 3904MB)
+    Core L#0 + PU L#0 (P#0)
+    Core L#1 + PU L#1 (P#1)
+    Core L#2 + PU L#2 (P#2)
+    Core L#3 + PU L#3 (P#3)
+  HostBridge
+    PCIBridge
+      PCI 0001:11:00.0 (Ethernet)
+        Net "eth1"
+  HostBridge
+    PCIBridge
+      PCI 0002:21:00.0 (Ethernet)
+        Net "eth0"
+  Block "mmcblk2"
+  Block "mmcblk0"
+  Block "mmcblk2boot1"
+  Block "mmcblk2boot0"

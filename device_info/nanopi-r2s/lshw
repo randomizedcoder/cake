@@ -1,0 +1,170 @@
+nanopi-r2s
+    description: Computer
+    product: FriendlyElec NanoPi R2S
+    serial: d1f56c60cfc2b93f
+    width: 64 bits
+    capabilities: smp cp15_barrier setend swp tagged_addr_disabled
+  *-core
+       description: Motherboard
+       physical id: 0
+     *-cpu:0
+          description: CPU
+          product: cpu
+          physical id: 0
+          bus info: cpu@0
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid cpufreq
+     *-cpu:1
+          description: CPU
+          product: cpu
+          physical id: 1
+          bus info: cpu@1
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid cpufreq
+     *-cpu:2
+          description: CPU
+          product: cpu
+          physical id: 2
+          bus info: cpu@2
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid cpufreq
+     *-cpu:3
+          description: CPU
+          product: cpu
+          physical id: 3
+          bus info: cpu@3
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid cpufreq
+     *-cpu:4 DISABLED
+          description: CPU
+          product: idle-states
+          physical id: 4
+          bus info: cpu@4
+     *-cpu:5 DISABLED
+          description: CPU
+          product: l2-cache0
+          physical id: 5
+          bus info: cpu@5
+     *-memory
+          description: System memory
+          physical id: 6
+          size: 976MiB
+  *-usbhost:0
+       product: DWC OTG Controller
+       vendor: Linux 6.1.50-current-rockchip64 dwc2_hsotg
+       physical id: 2
+       bus info: usb@1
+       logical name: usb1
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:1
+       product: xHCI Host Controller
+       vendor: Linux 6.1.50-current-rockchip64 xhci-hcd
+       physical id: 3
+       bus info: usb@2
+       logical name: usb2
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:2
+       product: xHCI Host Controller
+       vendor: Linux 6.1.50-current-rockchip64 xhci-hcd
+       physical id: 4
+       bus info: usb@3
+       logical name: usb3
+       version: 6.01
+       capabilities: usb-3.00
+       configuration: driver=hub slots=1 speed=5000Mbit/s
+     *-usb
+          description: Generic USB device
+          product: USB 10/100/1000 LAN
+          vendor: Realtek
+          physical id: 1
+          bus info: usb@3:1
+          version: 31.00
+          serial: 000000000000
+          capabilities: usb-3.00
+          configuration: driver=r8152 maxpower=288mA speed=5000Mbit/s
+  *-usbhost:3
+       product: EHCI Host Controller
+       vendor: Linux 6.1.50-current-rockchip64 ehci_hcd
+       physical id: 5
+       bus info: usb@4
+       logical name: usb4
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:4
+       product: Generic Platform OHCI controller
+       vendor: Linux 6.1.50-current-rockchip64 ohci_hcd
+       physical id: 1
+       bus info: usb@5
+       logical name: usb5
+       version: 6.01
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-mmc0
+       description: MMC Host
+       physical id: 6
+       logical name: mmc0
+     *-device
+          description: SD Card
+          product: JD2S5
+          vendor: Unknown (27)
+          physical id: 59b4
+          logical name: /dev/mmcblk0
+          version: 3.0
+          date: 04/2023
+          serial: 3269746583
+          size: 119GiB (128GB)
+          capabilities: sd partitioned partitioned:dos
+          configuration: logicalsectorsize=512 sectorsize=512 signature=b6dd54d7
+        *-volume
+             description: EXT4 volume
+             vendor: Linux
+             physical id: 1
+             logical name: /dev/mmcblk0p1
+             logical name: /
+             logical name: /var/log.hdd
+             version: 1.0
+             serial: ad282677-b062-41db-a316-91eb0fffdcef
+             size: 118GiB
+             capacity: 118GiB
+             capabilities: primary journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+             configuration: created=2023-08-31 19:12:13 filesystem=ext4 label=armbi_root lastmountpoint=/ modified=2023-10-14 04:44:35 mount.fstype=ext4 mount.options=rw,noatime,errors=remount-ro,commit=600 mounted=2023-10-14 04:44:38 state=mounted
+  *-input:0
+       product: rk805 pwrkey
+       physical id: 7
+       logical name: input0
+       logical name: /dev/input/event0
+       capabilities: platform
+  *-input:1
+       product: gpio-keys
+       physical id: 8
+       logical name: input1
+       logical name: /dev/input/event1
+       capabilities: platform
+  *-network:0
+       description: Ethernet interface
+       physical id: 9
+       logical name: end0
+       serial: 36:e6:2a:ca:63:c7
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=st_gmac driverversion=6.1.50-current-rockchip64 duplex=full ip=172.16.40.56 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+  *-network:1
+       description: Ethernet interface
+       physical id: a
+       bus info: usb@3:1
+       logical name: enx36e62aca63e7
+       serial: 36:e6:2a:ca:63:e7
+       size: 10Mbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8152 driverversion=v1.12.13 duplex=half firmware=rtl8153b-2 v1 10/23/19 link=no multicast=yes port=MII speed=10Mbit/s

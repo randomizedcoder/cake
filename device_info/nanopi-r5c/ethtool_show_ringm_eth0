@@ -1,0 +1,11 @@
+Ring parameters for eth0:
+Pre-set maximums:
+RX:		1024
+RX Mini:	n/a
+RX Jumbo:	n/a
+TX:		1024
+Current hardware settings:
+RX:		1024
+RX Mini:	n/a
+RX Jumbo:	n/a
+TX:		1024

@@ -1,0 +1,35 @@
+---
+- name: Ansible apt update and install packages
+  hosts: devices
+  strategy: free
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Ansible Update Cache and install packages
+      apt:
+        state: latest
+        update_cache: yes
+        name:
+          - ethtool
+          - lshw
+          - hwloc
+          - hwinfo
+          - htop
+          - prometheus-node-exporter
+          - pcp
+          - pcp-conf
+          - fping
+          - git-core
+          # ifconfig
+          - net-tools
+          - flent
+          - irtt
+          - tcpdump
+          - vlan
+          - vim
+          - rsync
+          - mtr
+          - make
+          - lldpd
+          - prometheus-node-exporter
+          - sshpass

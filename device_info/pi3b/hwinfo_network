@@ -1,0 +1,43 @@
+10: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+11: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: GYyk.ndpeucax6V1
+  Parent ID: YEYa.TfPFe67fIBB
+  SysFS ID: /class/net/enxb827eb7039cb
+  SysFS Device Link: /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.1/1-1.1:1.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "smsc95xx"
+  Driver Modules: "smsc95xx"
+  Device File: enxb827eb7039cb
+  HW Address: b8:27:eb:70:39:cb
+  Permanent HW Address: b8:27:eb:70:39:cb
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)
+
+12: None 00.0: 1070a WLAN
+  [Created at net.126]
+  Unique ID: AYEt.QXn1l67RSa1
+  Parent ID: YFEq.TfPFe67fIBB
+  SysFS ID: /class/net/wlan0
+  SysFS Device Link: /devices/platform/soc/3f300000.mmcnr/mmc_host/mmc1/mmc1:0001/mmc1:0001:1
+  Hardware Class: network interface
+  Model: "WLAN network interface"
+  Driver: "brcmfmac"
+  Driver Modules: "brcmfmac", "brcmfmac"
+  Device File: wlan0
+  HW Address: b8:27:eb:25:6c:9e
+  Permanent HW Address: b8:27:eb:25:6c:9e
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #2 (Ethernet controller)

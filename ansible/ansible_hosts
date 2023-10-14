@@ -1,0 +1,28 @@
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_connection=ssh
+ansible_user=das
+
+[ciscos]
+3750x ansible_host=172.16.40.64
+
+[ciscos:vars]
+ansible_network_os=ios
+ansible_user=cisco
+ansible_password=cisco
+ansible_connection=network_cli
+
+[laptops]
+3rd ansible_host=172.16.40.65
+ryzen ansible_host=172.16.40.58
+
+[devices]
+pi4 ansible_host=172.16.40.52
+pi3b ansible_host=172.16.40.51
+jetson-nano ansible_host=172.16.40.59
+nanopi-neo3 ansible_host=172.16.40.55
+nanopi-r5c ansible_host=172.16.40.53
+nanopi-r2s ansible_host=172.16.40.56
+nanopi-r1 ansible_host=172.16.40.62
+asus-cn60-2 ansible_host=172.16.40.60
+lpi4a ansible_host=172.16.40.63

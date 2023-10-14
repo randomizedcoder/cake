@@ -1,0 +1,7 @@
+---
+- name: Run gather tasts
+  hosts: "{{ host }}"
+  strategy: free
+  become: true
+  gather_facts: false
+  ansible.builtin.script: /home/das/cake/device_info/gather_details_for_tests.bash {{ output_dir }}

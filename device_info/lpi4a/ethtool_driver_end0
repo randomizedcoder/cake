@@ -1,0 +1,10 @@
+driver: st_gmac
+version: Jan_2016
+firmware-version: 
+expansion-rom-version: 
+bus-info: 
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no

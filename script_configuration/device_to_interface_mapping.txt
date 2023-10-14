@@ -1,0 +1,11 @@
+pi3b                Gi1/0/27
+ryzen               Gi1/0/35
+NanoPi-R5C          Gi1/0/31
+nanopi-r1           Gi1/0/30
+nanopi-r2s          Gi1/0/33
+nanopi-neo3         Gi1/0/26
+jetson-nano         Gi1/0/29
+pi4                 Gi1/0/25
+3rd                 Gi1/0/36
+asus-cn60-2         Gi1/0/28
+lpi4a               Gi1/0/32
