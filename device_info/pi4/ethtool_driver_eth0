@@ -1,0 +1,10 @@
+driver: bcmgenet
+version: 6.1.50-current-bcm2711
+firmware-version: 
+expansion-rom-version: 
+bus-info: 
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: no

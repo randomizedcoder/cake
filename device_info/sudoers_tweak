@@ -1,0 +1,2 @@
+#cp this_file /etc/sudoers.d/das
+das ALL=(ALL) NOPASSWD:ALL

@@ -1,0 +1,204 @@
+nanopi-r1
+    description: ARMv7 Processor rev 5 (v7l)
+    product: FriendlyARM NanoPi R1
+    serial: 02c000814977cc9b
+    width: 32 bits
+    capabilities: smp
+  *-core
+       description: Motherboard
+       physical id: 0
+     *-cpu:0
+          description: CPU
+          product: cpu
+          physical id: 0
+          bus info: cpu@0
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm cpufreq
+     *-cpu:1
+          description: CPU
+          product: cpu
+          physical id: 1
+          bus info: cpu@1
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm cpufreq
+     *-cpu:2
+          description: CPU
+          product: cpu
+          physical id: 2
+          bus info: cpu@2
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm cpufreq
+     *-cpu:3
+          description: CPU
+          product: cpu
+          physical id: 3
+          bus info: cpu@3
+          size: 1296MHz
+          capacity: 1296MHz
+          capabilities: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm cpufreq
+     *-memory
+          description: System memory
+          physical id: 4
+          size: 491MiB
+  *-usbhost:0
+       product: EHCI Host Controller
+       vendor: Linux 6.1.53-current-sunxi ehci_hcd
+       physical id: 1
+       bus info: usb@1
+       logical name: usb1
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:1
+       product: Generic Platform OHCI controller
+       vendor: Linux 6.1.53-current-sunxi ohci_hcd
+       physical id: 2
+       bus info: usb@2
+       logical name: usb2
+       version: 6.01
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-usbhost:2
+       product: EHCI Host Controller
+       vendor: Linux 6.1.53-current-sunxi ehci_hcd
+       physical id: 3
+       bus info: usb@3
+       logical name: usb3
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+     *-usb
+          description: Generic USB device
+          product: USB 10/100/1000 LAN
+          vendor: Realtek
+          physical id: 1
+          bus info: usb@3:1
+          version: 31.00
+          serial: 000000000000
+          capabilities: usb-2.10
+          configuration: driver=r8152 maxpower=350mA speed=480Mbit/s
+  *-usbhost:3
+       product: EHCI Host Controller
+       vendor: Linux 6.1.53-current-sunxi ehci_hcd
+       physical id: 4
+       bus info: usb@4
+       logical name: usb4
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:4
+       product: EHCI Host Controller
+       vendor: Linux 6.1.53-current-sunxi ehci_hcd
+       physical id: 5
+       bus info: usb@5
+       logical name: usb5
+       version: 6.01
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:5
+       product: Generic Platform OHCI controller
+       vendor: Linux 6.1.53-current-sunxi ohci_hcd
+       physical id: 6
+       bus info: usb@6
+       logical name: usb6
+       version: 6.01
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-usbhost:6
+       product: Generic Platform OHCI controller
+       vendor: Linux 6.1.53-current-sunxi ohci_hcd
+       physical id: 7
+       bus info: usb@7
+       logical name: usb7
+       version: 6.01
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-usbhost:7
+       product: Generic Platform OHCI controller
+       vendor: Linux 6.1.53-current-sunxi ohci_hcd
+       physical id: 8
+       bus info: usb@8
+       logical name: usb8
+       version: 6.01
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-mmc0
+       description: MMC Host
+       physical id: 9
+       logical name: mmc0
+     *-device
+          description: SD Card
+          product: SN128
+          vendor: SanDisk
+          physical id: aaaa
+          logical name: /dev/mmcblk0
+          version: 8.6
+          date: 12/2022
+          serial: 984420077
+          size: 119GiB (127GB)
+          capabilities: sd partitioned partitioned:dos
+          configuration: logicalsectorsize=512 sectorsize=512 signature=30331d7c
+        *-volume
+             description: EXT4 volume
+             vendor: Linux
+             physical id: 1
+             logical name: /dev/mmcblk0p1
+             logical name: /
+             logical name: /var/log.hdd
+             version: 1.0
+             serial: 070334cd-a51b-46af-81de-474088820169
+             size: 117GiB
+             capacity: 117GiB
+             capabilities: primary journaled extended_attributes large_files huge_files dir_nlink 64bit extents ext4 ext2 initialized
+             configuration: created=2023-08-31 23:28:52 filesystem=ext4 label=armbi_root lastmountpoint=/ modified=2023-10-14 06:28:13 mount.fstype=ext4 mount.options=rw,noatime,errors=remount-ro,commit=600 mounted=2023-10-14 06:10:53 state=mounted
+  *-mmc1
+       description: MMC Host
+       physical id: a
+       logical name: mmc1
+     *-device
+          description: SDIO Device
+          physical id: 1
+          bus info: mmc@1:0001:1
+          logical name: mmc1:0001:1
+          serial: 0
+          capabilities: sdio
+  *-mmc2
+       description: MMC Host
+       physical id: b
+       logical name: mmc2
+  *-input
+       product: gpio-keys
+       physical id: c
+       logical name: input0
+       logical name: /dev/input/event0
+       capabilities: platform
+  *-network:0
+       description: Ethernet interface
+       physical id: d
+       logical name: end0
+       serial: 02:81:49:77:cc:9b
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=st_mac100 driverversion=6.1.53-current-sunxi duplex=full ip=172.16.40.62 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+  *-network:1
+       description: Ethernet interface
+       physical id: e
+       bus info: usb@3:1
+       logical name: eth0
+       serial: 02:36:c9:76:6d:75
+       size: 10Mbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8152 driverversion=v1.12.13 duplex=half firmware=rtl8153b-2 v1 10/23/19 link=no multicast=yes port=MII speed=10Mbit/s
+  *-network:2
+       description: Wireless interface
+       physical id: f
+       bus info: mmc@1:0001:1
+       logical name: wlan0
+       serial: 7c:c7:09:a4:b8:78
+       capabilities: ethernet physical wireless
+       configuration: broadcast=yes driver=rtl8189es driverversion=6.1.53-current-sunxi multicast=yes wireless=unassociated

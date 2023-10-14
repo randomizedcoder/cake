@@ -1,0 +1,42 @@
+---
+- name: Ansible apt update and install packages for laptops
+  hosts: laptops
+  strategy: free
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Ansible Update Cache and install packages for laptops
+      apt:
+        state: latest
+        update_cache: yes
+        name:
+          - ethtool
+          - lshw
+          - hwloc
+          - hwinfo
+          - htop
+          - prometheus-node-exporter
+          - pcp
+          - pcp-conf
+          - fping
+          - git-core
+          # ifconfig
+          - net-tools
+          - flent
+          - irtt
+          - tcpdump
+          - vlan
+          - vim
+          - rsync
+          - mtr
+          - make
+          - netperf
+          - iperf
+          - lldpd
+          - sshpass
+          - ansible
+          - iputils-ping
+          # newer kernel
+          - linux-image-generic-hwe-22.04
+          - snmp
+          - snmp-mibs-downloader

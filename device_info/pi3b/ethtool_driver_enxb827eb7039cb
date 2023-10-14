@@ -1,0 +1,10 @@
+driver: smsc95xx
+version: 6.1.50-current-bcm2711
+firmware-version: smsc95xx USB 2.0 Ethernet
+expansion-rom-version: 
+bus-info: usb-3f980000.usb-1.1
+supports-statistics: no
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: no

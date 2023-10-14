@@ -1,0 +1,177 @@
+nanopi-r5c
+    description: Computer
+    product: FriendlyElec NanoPi R5C
+    serial: 2402c978801a3e50
+    width: 64 bits
+    capabilities: smp cp15_barrier setend swp tagged_addr_disabled
+  *-core
+       description: Motherboard
+       physical id: 0
+     *-cpu:0
+          description: CPU
+          product: cpu
+          physical id: 0
+          bus info: cpu@0
+          size: 1992MHz
+          capacity: 1992MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp cpufreq
+     *-cpu:1
+          description: CPU
+          product: cpu
+          physical id: 1
+          bus info: cpu@1
+          size: 1992MHz
+          capacity: 1992MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp cpufreq
+     *-cpu:2
+          description: CPU
+          product: cpu
+          physical id: 2
+          bus info: cpu@2
+          size: 1992MHz
+          capacity: 1992MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp cpufreq
+     *-cpu:3
+          description: CPU
+          product: cpu
+          physical id: 3
+          bus info: cpu@3
+          size: 1992MHz
+          capacity: 1992MHz
+          capabilities: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp cpufreq
+     *-cpu:4 DISABLED
+          description: CPU
+          product: idle-states
+          physical id: 4
+          bus info: cpu@4
+     *-memory
+          description: System memory
+          physical id: 5
+          size: 3903MiB
+     *-pci:0
+          description: PCI bridge
+          product: Fuzhou Rockchip Electronics Co., Ltd
+          vendor: Fuzhou Rockchip Electronics Co., Ltd
+          physical id: 100
+          bus info: pci@0001:10:00.0
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pm msi pciexpress msix normal_decode bus_master cap_list rom
+          configuration: driver=pcieport
+          resources: irq:118 memory:f2300000-f230ffff ioport:200000(size=4096) memory:f2200000-f22fffff
+        *-network
+             description: Ethernet interface
+             product: RTL8125 2.5GbE Controller
+             vendor: Realtek Semiconductor Co., Ltd.
+             physical id: 0
+             bus info: pci@0001:11:00.0
+             logical name: eth1
+             version: 05
+             serial: fe:d9:30:ff:7f:4b
+             capacity: 1Gbit/s
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+             configuration: autonegotiation=on broadcast=yes driver=r8125 driverversion=9.010.01-NAPI latency=0 link=no multicast=yes port=twisted pair
+             resources: irq:117 ioport:200000(size=256) memory:f2200000-f220ffff memory:f2210000-f2213fff
+     *-pci:1
+          description: PCI bridge
+          product: Fuzhou Rockchip Electronics Co., Ltd
+          vendor: Fuzhou Rockchip Electronics Co., Ltd
+          physical id: 101
+          bus info: pci@0002:20:00.0
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pm msi pciexpress msix normal_decode bus_master cap_list rom
+          configuration: driver=pcieport
+          resources: irq:107 memory:f0300000-f030ffff ioport:100000(size=4096) memory:f0200000-f02fffff
+        *-network
+             description: Ethernet interface
+             product: RTL8125 2.5GbE Controller
+             vendor: Realtek Semiconductor Co., Ltd.
+             physical id: 0
+             bus info: pci@0002:21:00.0
+             logical name: eth0
+             version: 05
+             serial: fa:d9:30:ff:7f:4b
+             size: 1Gbit/s
+             capacity: 1Gbit/s
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+             configuration: autonegotiation=on broadcast=yes driver=r8125 driverversion=9.010.01-NAPI duplex=full ip=172.16.40.53 latency=0 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+             resources: irq:106 ioport:100000(size=256) memory:f0200000-f020ffff memory:f0210000-f0213fff
+  *-usbhost:0
+       product: EHCI Host Controller
+       vendor: Linux 5.10.160 ehci_hcd
+       physical id: 1
+       bus info: usb@1
+       logical name: usb1
+       version: 5.10
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:1
+       product: EHCI Host Controller
+       vendor: Linux 5.10.160 ehci_hcd
+       physical id: 2
+       bus info: usb@2
+       logical name: usb2
+       version: 5.10
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:2
+       product: Generic Platform OHCI controller
+       vendor: Linux 5.10.160 ohci_hcd
+       physical id: 3
+       bus info: usb@3
+       logical name: usb3
+       version: 5.10
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-usbhost:3
+       product: Generic Platform OHCI controller
+       vendor: Linux 5.10.160 ohci_hcd
+       physical id: 4
+       bus info: usb@4
+       logical name: usb4
+       version: 5.10
+       capabilities: usb-1.10
+       configuration: driver=hub slots=1 speed=12Mbit/s
+  *-usbhost:4
+       product: xHCI Host Controller
+       vendor: Linux 5.10.160 xhci-hcd
+       physical id: 5
+       bus info: usb@5
+       logical name: usb5
+       version: 5.10
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:5
+       product: xHCI Host Controller
+       vendor: Linux 5.10.160 xhci-hcd
+       physical id: 6
+       bus info: usb@6
+       logical name: usb6
+       version: 5.10
+       capabilities: usb-3.00
+       configuration: driver=hub slots=1 speed=5000Mbit/s
+  *-usbhost:6
+       product: xHCI Host Controller
+       vendor: Linux 5.10.160 xhci-hcd
+       physical id: 7
+       bus info: usb@7
+       logical name: usb7
+       version: 5.10
+       capabilities: usb-2.00
+       configuration: driver=hub slots=1 speed=480Mbit/s
+  *-usbhost:7
+       product: xHCI Host Controller
+       vendor: Linux 5.10.160 xhci-hcd
+       physical id: 8
+       bus info: usb@8
+       logical name: usb8
+       version: 5.10
+       capabilities: usb-3.00
+       configuration: driver=hub slots=1 speed=5000Mbit/s

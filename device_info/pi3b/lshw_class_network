@@ -1,0 +1,22 @@
+  *-usb
+       description: Ethernet interface
+       physical id: 1
+       bus info: usb@1:1.1
+       logical name: enxb827eb7039cb
+       version: 2.00
+       serial: b8:27:eb:70:39:cb
+       size: 100Mbit/s
+       capacity: 100Mbit/s
+       capabilities: usb-2.00 ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=smsc95xx driverversion=6.1.50-current-bcm2711 duplex=full firmware=smsc95xx USB 2.0 Ethernet ip=172.16.40.51 link=yes maxpower=2mA multicast=yes port=twisted pair speed=100Mbit/s
+  *-interface:0
+       description: Wireless interface
+       product: 43430
+       vendor: Broadcom
+       physical id: 1
+       bus info: mmc@1:0001:1
+       logical name: mmc1:0001:1
+       logical name: wlan0
+       serial: b8:27:eb:25:6c:9e
+       capabilities: ethernet physical wireless
+       configuration: broadcast=yes driver=brcmfmac driverversion=7.45.98 firmware=01-8e14b897 multicast=yes wireless=IEEE 802.11

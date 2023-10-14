@@ -1,0 +1,15 @@
+---
+- name: show interface capture
+  # hosts: ciscos
+  hosts: "{{ targets }}"
+  gather_facts: no
+  tasks:
+    - name: show interface
+      ios_command:
+        commands:
+          - show interface {{ interface }}
+      register: config
+    - name: save output to local directory
+      copy:
+        content: "{{ config.stdout | replace('\\n', '\n') }}"
+        dest: "{{ destfile }}"

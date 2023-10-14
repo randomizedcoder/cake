@@ -1,0 +1,10 @@
+---
+- name: Reboot all devices
+  hosts: devices
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Reboot all devices
+      # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/reboot_module.html
+      ansible.builtin.reboot:
+        reboot_timeout: 120

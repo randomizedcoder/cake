@@ -1,0 +1,43 @@
+23: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.GQNx7L4uPNA
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+24: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: usDW.ndpeucax6V1
+  Parent ID: rBUF.+lCnzM04KG0
+  SysFS ID: /class/net/eth0
+  SysFS Device Link: /devices/platform/3c0800000.pcie/pci0002:20/0002:20:00.0/0002:21:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8125"
+  Driver Modules: "r8125"
+  Device File: eth0
+  HW Address: fa:d9:30:ff:7f:4b
+  Permanent HW Address: fa:d9:30:ff:7f:4b
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #1 (Ethernet controller)
+
+25: None 01.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: L2Ua.ndpeucax6V1
+  Parent ID: JNkJ.+lCnzM04KG0
+  SysFS ID: /class/net/eth1
+  SysFS Device Link: /devices/platform/3c0400000.pcie/pci0001:10/0001:10:00.0/0001:11:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "r8125"
+  Driver Modules: "r8125"
+  Device File: eth1
+  HW Address: fe:d9:30:ff:7f:4b
+  Permanent HW Address: fe:d9:30:ff:7f:4b
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #3 (Ethernet controller)

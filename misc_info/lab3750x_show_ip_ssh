@@ -1,0 +1,13 @@
+lab3750x#show ip ssh
+SSH Enabled - version 2.0
+Authentication methods:publickey,keyboard-interactive,password
+Authentication Publickey Algorithms:x509v3-ssh-rsa,ssh-rsa
+Hostkey Algorithms:x509v3-ssh-rsa,ssh-rsa
+Encryption Algorithms:aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc
+MAC Algorithms:hmac-sha1,hmac-sha1-96
+Authentication timeout: 120 secs; Authentication retries: 3
+Minimum expected Diffie Hellman key size : 1024 bits
+IOS Keys in SECSH format(ssh-rsa, base64 encoded): TP-self-signed-4184440960
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCkdfqtL/baEo1qKO7SHk8qYk05a9b41s9HlxwU/6sj
+yrBwQx4rLr8LgnS7mUR23RmdaWFTWe1nWvn7/4qYb2bfsIkCQZ73g0pw1hLXhRAa/Y/LxBQtLltYKivp
+yFx7Otx/eH5Py1Uf7/bEgFApvvV5JUWqycLqzzkNhrpDcE//oQ==

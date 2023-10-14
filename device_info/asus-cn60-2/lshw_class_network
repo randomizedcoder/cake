@@ -1,0 +1,30 @@
+  *-network
+       description: Ethernet interface
+       product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
+       vendor: Realtek Semiconductor Co., Ltd.
+       physical id: 0
+       bus info: pci@0000:01:00.0
+       logical name: enp1s0
+       version: 0c
+       serial: c4:54:44:8c:87:5f
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8169 driverversion=5.15.0-86-generic duplex=full firmware=rtl8168g-2_0.0.1 02/06/13 ip=172.16.40.60 latency=0 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+       resources: irq:18 ioport:2000(size=256) memory:86300000-86300fff memory:86200000-86203fff
+  *-network DISABLED
+       description: Wireless interface
+       product: AR9462 Wireless Network Adapter
+       vendor: Qualcomm Atheros
+       physical id: 0
+       bus info: pci@0000:02:00.0
+       logical name: wlp2s0
+       version: 01
+       serial: 54:27:1e:e7:eb:92
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress bus_master cap_list rom ethernet physical wireless
+       configuration: broadcast=yes driver=ath9k driverversion=5.15.0-86-generic firmware=N/A latency=0 link=no multicast=yes wireless=IEEE 802.11
+       resources: irq:19 memory:86800000-8687ffff memory:86880000-8688ffff

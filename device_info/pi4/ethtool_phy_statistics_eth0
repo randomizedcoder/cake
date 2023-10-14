@@ -1,0 +1,6 @@
+PHY statistics:
+     phy_receive_errors: 0
+     phy_serdes_ber_errors: 0
+     phy_false_carrier_sense_errors: 0
+     phy_local_rcvr_nok: 1
+     phy_remote_rcv_nok: 0

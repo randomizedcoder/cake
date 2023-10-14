@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+LLDP neighbors:
+-------------------------------------------------------------------------------
+Interface:    end0, via: LLDP, RID: 1, Time: 0 day, 08:22:03
+  Chassis:     
+    ChassisID:    mac a0:ec:f9:69:80:80
+    SysName:      lab3750x.3750x.lab.org
+    SysDescr:     Cisco IOS Software, C3750E Software (C3750E-UNIVERSALK9-M), Version 15.2(4)E10, RELEASE SOFTWARE (fc2)
+                  Technical Support: http://www.cisco.com/techsupport
+                  Copyright (c) 1986-2020 by Cisco Systems, Inc.
+                  Compiled Tue 31-Mar-20 13:22 by prod_rel_team
+    MgmtIP:       172.16.40.64
+    Capability:   Bridge, on
+    Capability:   Router, on
+  Port:        
+    PortID:       ifname Gi1/0/32
+    PortDescr:    lpi4a
+    TTL:          120
+-------------------------------------------------------------------------------

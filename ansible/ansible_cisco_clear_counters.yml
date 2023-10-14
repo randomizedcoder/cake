@@ -1,0 +1,39 @@
+---
+- name: Cisco clear counters
+  hosts: ciscos
+  gather_facts: false
+  tasks:
+    - name: clear counters
+      ios_command:
+        commands:
+          - command: clear counters
+            prompt: Clear "show interface" counters on all interfaces \[confirm\]
+            answer: y
+      vars:
+        ansible_command_timeout: 60
+# https://docs.ansible.com/ansible/latest/network/getting_started/network_connection_options.html
+# - name: run command that requires answering a prompt
+#   ios_command:
+#     commands:
+#       - command: 'clear counters GigabitEthernet0/2'
+#         prompt: 'Clear "show interface" counters on this interface [confirm]'
+#         answer: c
+# https://josh-tracy.github.io/Ansible_Cisco/
+# show interfaces counters
+# show interfaces counters errors
+# sh int gi 1/0/25
+# lab3750x#sh int gi 1/0/25 counters errors
+
+# Port        Align-Err     FCS-Err    Xmit-Err     Rcv-Err  UnderSize  OutDiscards
+# Gi1/0/25            0           0           0           1          0            0
+
+# Port      Single-Col  Multi-Col   Late-Col  Excess-Col  Carri-Sen      Runts     Giants
+# Gi1/0/25           0          0          0           0          0          1          0
+
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_command_module.html
+# - name: Run commands that require answering a prompt
+#   cisco.ios.ios_command:
+#     commands:
+#       - command: "clear counters GigabitEthernet2"
+#         prompt: 'Clear "show interface" counters on this interface \[confirm\]'
+#         answer: "y"

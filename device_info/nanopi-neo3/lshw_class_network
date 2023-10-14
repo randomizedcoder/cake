@@ -1,0 +1,9 @@
+  *-network
+       description: Ethernet interface
+       physical id: a
+       logical name: end0
+       serial: 16:79:e6:33:83:d6
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       capabilities: ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=st_gmac driverversion=6.1.50-current-rockchip64 duplex=full ip=172.16.40.55 link=yes multicast=yes port=twisted pair speed=1Gbit/s

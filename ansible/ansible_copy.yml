@@ -1,0 +1,19 @@
+# ansible-playbook -i ./ansible_hosts ansible_copy.yml --ask-become-pass
+# https://stackoverflow.com/questions/33222641/override-hosts-variable-of-ansible-playbook-from-the-command-line
+- name: Copy file
+  hosts: "{{ targets }}"
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Copy file
+      copy:
+        src: "{{ source_file }}"
+        dest: "{{ dest_file  }}"
+        #src: "{{ item.src }}"
+        #dest: "{{ item.dest }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: u=rw,g=rw,o=r
+      #with_items:
+      #- { src: ./sudoers_tweak, dest: /etc/sudoers.d/das }
+      #- { src: app2.conf, dest: /etc/app2/ }

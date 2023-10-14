@@ -1,6 +1,6 @@
 version: 0.1
 cli:
-  version: 1.14.2
+  version: 1.16.2
 plugins:
   sources:
     - id: trunk
@@ -13,9 +13,22 @@ runtimes:
     - python@3.10.8
 lint:
   enabled:
+    - checkov@2.4.9
+    - gofmt@1.20.4
+    - gokart@0.5.1
+    - golangci-lint@1.54.2
+    - oxipng@8.0.0
+    - trivy@0.45.1
+    - yamllint@1.32.0
     - git-diff-check
-    - markdownlint@0.35.0
+    - markdownlint@0.37.0
     - prettier@3.0.3
     - shellcheck@0.9.0
     - shfmt@3.6.0
-    - trufflehog@3.54.3
+    - trufflehog@3.57.0
+actions:
+  enabled:
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - trunk-upgrade-available

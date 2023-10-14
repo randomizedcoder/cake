@@ -1,0 +1,31 @@
+  *-network
+       description: Ethernet interface
+       product: RTL8125 2.5GbE Controller
+       vendor: Realtek Semiconductor Co., Ltd.
+       physical id: 0
+       bus info: pci@0001:11:00.0
+       logical name: eth1
+       version: 05
+       serial: fe:d9:30:ff:7f:4b
+       capacity: 1Gbit/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8125 driverversion=9.010.01-NAPI latency=0 link=no multicast=yes port=twisted pair
+       resources: irq:117 ioport:200000(size=256) memory:f2200000-f220ffff memory:f2210000-f2213fff
+  *-network
+       description: Ethernet interface
+       product: RTL8125 2.5GbE Controller
+       vendor: Realtek Semiconductor Co., Ltd.
+       physical id: 0
+       bus info: pci@0002:21:00.0
+       logical name: eth0
+       version: 05
+       serial: fa:d9:30:ff:7f:4b
+       size: 1Gbit/s
+       capacity: 1Gbit/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8125 driverversion=9.010.01-NAPI duplex=full ip=172.16.40.53 latency=0 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+       resources: irq:106 ioport:100000(size=256) memory:f0200000-f020ffff memory:f0210000-f0213fff

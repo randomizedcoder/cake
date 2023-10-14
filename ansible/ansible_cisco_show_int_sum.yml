@@ -1,0 +1,21 @@
+---
+- name: Cisco show interface summary
+  hosts: ciscos
+  gather_facts: false
+  tasks:
+    - name: show int sum
+      ios_command:
+        commands:
+          - command: show interface summary
+      register: output
+    - name: print output
+      debug:
+        var: output.stdout_lines
+# https://docs.ansible.com/ansible/latest/network/getting_started/network_connection_options.html
+# - name: run command that requires answering a prompt
+#   ios_command:
+#     commands:
+#       - command: 'clear counters GigabitEthernet0/2'
+#         prompt: 'Clear "show interface" counters on this interface [confirm]'
+#         answer: c
+# https://josh-tracy.github.io/Ansible_Cisco/
