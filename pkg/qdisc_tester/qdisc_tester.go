@@ -6,8 +6,10 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"os/exec"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -111,6 +113,11 @@ type IperfConfig struct {
 	IperfParallel          int
 }
 
+type FlentConfig struct {
+	FlentLengthSeconds       int
+	FlentLengthBufferSeconds int
+}
+
 type QdiscTester interface {
 	RunTests()
 
@@ -137,6 +144,7 @@ type QdiscTest struct {
 	fastForward string
 	foundStep   bool
 	reboot      bool
+	shuffle     bool
 
 	logger *zap.Logger
 	sugar  *zap.SugaredLogger
@@ -165,10 +173,11 @@ type QdiscTest struct {
 	//deviceTests map[device]map[qdisc]map[testClient]map[phase]map[step]deviceTest
 
 	iperfConf IperfConfig
+	flentConf FlentConfig
 }
 
 // NewQdiscTest is a constructor for the qdisc tests
-func NewQdiscTest(cakePath string, fns FileNames, ic IperfConfig, outputPath string, reboot bool, debugLevel int, ff string) *QdiscTest {
+func NewQdiscTest(cakePath string, fns FileNames, ic IperfConfig, fc FlentConfig, outputPath string, reboot bool, shuffle bool, debugLevel int, ff string) *QdiscTest {
 
 	q := new(QdiscTest)
 
@@ -178,6 +187,7 @@ func NewQdiscTest(cakePath string, fns FileNames, ic IperfConfig, outputPath str
 		q.foundStep = true
 	}
 	q.reboot = reboot
+	q.shuffle = shuffle
 
 	t := time.Now()
 	q.instance = fmt.Sprintf("%d-%02d-%02dT%02d:%02d:%02d",
@@ -288,6 +298,7 @@ func NewQdiscTest(cakePath string, fns FileNames, ic IperfConfig, outputPath str
 	//q.deviceTests = make(map[device]map[qdisc]map[testClient]map[phase]map[step]deviceTest)
 
 	q.iperfConf = ic
+	q.flentConf = fc
 
 	return q
 }
@@ -301,6 +312,10 @@ func (q *QdiscTest) RunTests() {
 		}
 	}()
 
+	if q.shuffle {
+		Shuffle(q.devices)
+	}
+
 	for di, device := range q.devices {
 
 		q.sugar.Infow("device", "di", di, "device", device)
@@ -308,6 +323,10 @@ func (q *QdiscTest) RunTests() {
 		q.makeOutputDir(device)
 
 		pC.WithLabelValues("testDeviceQdisc", device, "", "counter").Inc()
+
+		if q.shuffle {
+			Shuffle(q.qdiscs)
+		}
 
 		for qi, qdisc := range q.qdiscs {
 
@@ -319,7 +338,8 @@ func (q *QdiscTest) RunTests() {
 
 			// Flent doesn't work on ubuntu LTS because of a fping issue: https://github.com/tohojo/flent/issues/232
 			//testClients := []string{"iperf", "flent"} //
-			testClients := []string{"iperf"}
+			//testClients := []string{"iperf"}
+			testClients := []string{"flent"}
 			for tci, testClient := range testClients {
 
 				q.sugar.Infow("testClient", "tci", tci, "testClient", testClient)
@@ -753,7 +773,7 @@ func (q *QdiscTest) executeFlent(device string, qdisc string, testClient string,
 
 	sudoFullCommand := q.getFullCommand("sudo")
 	ipFullCommand := q.getFullCommand("ip")
-	flentFullCommand := q.getFullCommand("flent")
+	flentFullCommand := q.getFullCommand("/usr/local/bin/flent") // use freshly installed flent from github: https://github.com/tohojo/flent#installing-flent
 	if q.debugLevel > 10 {
 		q.sugar.Infow("FullCommands:",
 			"sudoFullCommand", sudoFullCommand,
@@ -769,7 +789,8 @@ func (q *QdiscTest) executeFlent(device string, qdisc string, testClient string,
 		flentFullCommand,
 		"rrul", // test name
 		// Options
-		"--output ", q.stepDir(device, qdisc, testClient, phase, step) + "/flent_" + device + "_" + qdisc + ".png",
+		//"--verbose",
+		//"--output", q.stepDir(device, qdisc, testClient, phase, step) + "/flent_" + device + "_" + qdisc + ".png",
 		"--data-dir", q.stepDir(device, qdisc, testClient, phase, step) + "/",
 		"--format", "summary", // default format
 		"--plot", "all_scaled",
@@ -779,7 +800,7 @@ func (q *QdiscTest) executeFlent(device string, qdisc string, testClient string,
 		//"--remote-metadata", remoteMetadataHostnameCst, // NOT doing this yet, because I'm not sure we can ssh from the namespace
 		// Test config
 		"--host", ip,
-		"--length", strconv.FormatInt(int64(q.iperfConf.IperfTimeSeconds), base10),
+		"--length", strconv.FormatInt(int64(q.flentConf.FlentLengthSeconds), base10),
 		"--ipv4",
 		"--socket-stats",
 	}
@@ -795,7 +816,11 @@ func (q *QdiscTest) executeFlent(device string, qdisc string, testClient string,
 		q.sugar.Infow("executeFlent:", "commandString", commandString)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), (time.Duration(q.iperfConf.IperfTimeSeconds)*time.Second)+(time.Duration(q.iperfConf.IperfTimeBufferSeconds)*time.Second))
+	d := time.Duration(q.flentConf.FlentLengthSeconds)*time.Second + time.Duration(q.flentConf.FlentLengthBufferSeconds*2)*time.Second
+	if q.debugLevel > 10 {
+		q.sugar.Info("context timeout duration:", d)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), d)
 	defer cancel()
 
 	// sudo is REQUIRED to execute in the name space!!
@@ -1299,5 +1324,15 @@ func (q *QdiscTest) testCompleted() {
 
 	if err := os.WriteFile(q.outputPath+"/testsComplete", []byte(strconv.FormatInt(int64(q.testsComplete), base10)), FileModeCst); err != nil {
 		log.Fatal(err)
+	}
+}
+
+func Shuffle(slice interface{}) {
+	rv := reflect.ValueOf(slice)
+	swap := reflect.Swapper(slice)
+	length := rv.Len()
+	for i := length - 1; i > 0; i-- {
+		j := rand.Intn(i + 1)
+		swap(i, j)
 	}
 }

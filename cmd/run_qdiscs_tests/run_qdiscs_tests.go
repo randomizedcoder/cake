@@ -20,8 +20,11 @@ const (
 
 	iperfIntervalSecondsCst   = 10
 	iperfTimeSecondsCst       = 60
-	iperfTimeBufferSecondsCst = 10
+	iperfTimeBufferSecondsCst = 30
 	iperfParallelCst          = 20
+
+	flentLengthSecondsCst       = 60
+	flentLengthBufferSecondsCst = 30
 
 	signalChannelSize       = 10
 	promListenCst           = ":9111"
@@ -56,6 +59,7 @@ func main() {
 
 	debugLevel := flag.Int("debugLevel", debugLevelCst, "nasty debugLevel")
 	reboot := flag.Bool("reboot", false, "reboot devices before tests if this is set")
+	shuffle := flag.Bool("shuffle", false, "shuffle devices and qdiscs")
 
 	cakePath := flag.String("cakePath", cakePathCst, "file path containing the config files")
 	devicesFilename := flag.String("devicesFilename", "devices.txt", "filename with the list of devices")
@@ -69,6 +73,9 @@ func main() {
 	iperfTimeSeconds := flag.Int("iperfTimeSeconds", iperfTimeSecondsCst, "iperfTimeSeconds")
 	iperfTimeBufferSeconds := flag.Int("iperfTimeBufferSeconds", iperfTimeBufferSecondsCst, "iperfTimeBufferSeconds")
 	iperfParallel := flag.Int("iperfParallel", iperfParallelCst, "iperfParallel")
+
+	flentLengthSeconds := flag.Int("flentLengthSeconds", flentLengthSecondsCst, "flentLengthSeconds")
+	flentLengthBufferSeconds := flag.Int("flentLengthBufferSeconds", flentLengthBufferSecondsCst, "flentLengthBufferSeconds")
 
 	fastForward := flag.String("fastForward", "", "fastFoward to step.  This option allows you to specific the a named step, mostly to speed up the testing cycle")
 
@@ -102,7 +109,12 @@ func main() {
 		IperfParallel:          *iperfParallel,
 	}
 
-	q := qdisc_tester.NewQdiscTest(*cakePath, *fns, *ic, *outputPath, *reboot, *debugLevel, *fastForward)
+	fc := &qdisc_tester.FlentConfig{
+		FlentLengthSeconds:       *flentLengthSeconds,
+		FlentLengthBufferSeconds: *flentLengthBufferSeconds,
+	}
+
+	q := qdisc_tester.NewQdiscTest(*cakePath, *fns, *ic, *fc, *outputPath, *reboot, *shuffle, *debugLevel, *fastForward)
 
 	q.RunTests()
 
