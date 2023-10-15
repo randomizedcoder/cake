@@ -50,6 +50,9 @@ for device in "${devices[@]}"; do
 		echo ip netns exec network"${namespace}" nice -20 netserver \&
 		ip netns exec network"${namespace}" nice -20 netserver &
 
+		echo ip netns exec network"${namespace}" nice -20 irtt server \&
+		ip netns exec network"${namespace}" nice -20 irtt server &
+
 	done
 
 done
