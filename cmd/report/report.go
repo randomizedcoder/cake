@@ -53,10 +53,13 @@ func main() {
 
 	paths := Files(*outputPath, *iperfOutFolder, *iperfStdOut)
 
-	var outputLines []string
+	var allOutputLines []string
+	outputLines := make(map[string][]string)
+	var testDir string
 	for _, path := range paths {
 
 		parts := strings.Split(path, "/")
+		testDir = parts[0]
 		device := parts[1]
 		qdisc := parts[2]
 		if debugLevel > 10 {
@@ -89,12 +92,20 @@ func main() {
 			log.Println("mbs:", mbs)
 		}
 
-		outputLines = append(outputLines, fmt.Sprintf("%s,%s,%s", device, qdisc, mbs))
+		outputLines[testDir] = append(outputLines[testDir], fmt.Sprintf("%s,%s,%s", device, qdisc, mbs))
+		allOutputLines = append(allOutputLines, fmt.Sprintf("%s,%s,%s,%s", testDir, device, qdisc, mbs))
 	}
 
-	err := writeLines(*outputPath+*reportName, outputLines)
-	if err != nil {
-		log.Fatal(err)
+	for key := range outputLines {
+		err := writeLines(*outputPath+"/"+key+"/"+*reportName, outputLines[key])
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	aErr := writeLines(*outputPath+"/"+*reportName, allOutputLines)
+	if aErr != nil {
+		log.Fatal(aErr)
 	}
 }
 
